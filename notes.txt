@@ -1,0 +1,114 @@
+1  pwd
+    2  ls
+    3  sudo yum -y install docker
+    4  docker info
+    5  whoami
+    6  sudo usermod -a -G docker ec2-user
+    7  id -a
+    8  sudo service docker start
+    9  sudo chkconfig docker on
+   10  history
+   11  sudo service docker status
+   12  docker info
+   13  ll
+   14  docker pull http:2.4
+   15  docker pull httpd:2.4
+   16  docker images
+   17  docker inspect httpd
+   18  docker inspect httpd:2.4
+   19  history
+   20  docker run -d --name testapache httpd2.4
+   21  docker run -d --name testapache httpd:2.4
+   22  docker ps -a
+   23  docker stop testapache
+   24  docker p
+   25  docker ps
+   26  docker ps -a
+   27  git clone https://github.com/rsubramanian4/testapp.git
+   28  docker build -t knowdocker/myapache:1.0 testapp/frontend/
+   29  docker images
+   30  docker inspect e32ae41a4574
+   31  history
+   32  docker ps
+   33  docke images
+   34  dockr images
+   35  docker images
+   36  docker run -d --name myapache knowdocker/myapache:1.0
+   37  docker ps
+   38  docker logs myapache
+   39  docker stop myapache
+   40  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   41  docker run -d --name myapache9 -p 9000:80  knowdocker/myapache:1.0
+   42  curl http://localhost
+   43  curl http://localhost:9000
+   44  history
+   45  curl http://localhost:9000
+   46  docker conatiner -rm myapache
+   47  docker stop myapache
+   48  docker rm myapache
+   49  docker stop myapache9
+   50  docker rm myapache9
+   51  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   52  curl http://localhost:9000
+   53  docker push knowdocker/myapache:1.0
+   54  ll
+   55  git commit 
+   56  git commit https://github.com/rsubramanian4/testapp.git
+   57  cd testapp/
+   58  git commit https://github.com/rsubramanian4/testapp.git
+   59  ll
+   60  cd ..
+   61  ll
+   62  docker login
+   63  docker login -u "knowdocker" -p "Dock$2474"
+   64  docker login -u knowdocker -p Dock$2474
+   65  docker login -uknowdocker -pDock$2474
+   66  docker login -u knowdocker -p Dock$2474
+   67  https://github.com/rsubramanian4/testapp.git
+   68  LL
+   69  ll
+   70  cd testapp/
+   71  ll
+   72  git commit
+   73  git push
+   74  git stage
+   75  exit
+   76  pwd
+   77  ll
+   78  exit
+   79  docker ps
+   80  docker ps -
+   81  docker ps -a
+   82  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   83  docker start myapache
+   84  docker ps
+   85  docket login
+   86  docker login
+   87  docker push myapache:1.0
+   88  docker push knowdocker/myapache:1.0
+   89  cd testapp/
+   90  ll
+   91  git add *
+   92  git commit -m "first commit"
+   93  git config --global
+   94  git config
+   95  git config --global
+   96  git config
+   97  git config --global --list
+   98  git init
+   99  vi .git
+  100  git commit -m "first commit"
+  101  git push
+  102  history
+  103  git commit -m "test commmit"
+  104  git add *
+  105  git commit -m "test commmit"
+  106  git push
+  107  git config --global user.name "rsubramanian4"
+  108  git config --global user.email mailtoraja.s@gmail.com
+  109  git config --list
+  110  git add
+  111  git add *
+  112  git commit -m "second commmit"
+  113  git push
+  114  history
