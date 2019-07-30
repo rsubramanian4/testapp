@@ -1,4 +1,30 @@
-1  pwd
+
+
+http://labsap.s3-website-us-west-1.amazonaws.com/
+Student5	960252834999
+
+https://notepad.pw/t7wzpv19
+
+http://bit.ly/2QP3TIl
+
+cloud9
+region north virginea
+
+
+sudo service docker status
+
+update of all existing packages: yum -y update
+install platrorm - yum -y install httpd
+Copy the code to document /var/www/html
+Set env vaiable for backend LB : BACKENDLB
+Apache running in port 80
+start apache
+
+diff between ADD and COPY
+
+sudo service docker status
+---------------------------------------------------------------------
+pwd
     2  ls
     3  sudo yum -y install docker
     4  docker info
@@ -114,6 +140,7 @@
   114  history
   
   ---------------- Day 1 commands ends ----------------
+  
   
   
   
