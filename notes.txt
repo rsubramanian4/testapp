@@ -143,4 +143,19 @@ pwd
   
   
   
+  docker build -t knowdocker/nginx:1.0 testapp/excercise/
+ 
+  docker run -dit ubuntu:18.04
+  docker exec containername /bin/sh
+  cat /etc/nginx/sites-enabled/default | grep root
   
+  read on bactics
+  
+  docker run -d --name nginx-apache -p 9001:80  knowdocker/nginx-php:1.0
+  
+  docker history image name ro know rhe layers of file
+  
+  nop  - explore
+  
+  to remove dangling images
+  docker rmi -f $(docker images -f "dangling=true" -q) 
