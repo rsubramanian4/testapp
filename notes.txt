@@ -159,3 +159,16 @@ pwd
   
   to remove dangling images
   docker rmi -f $(docker images -f "dangling=true" -q) 
+  
+  Volumes
+  
+  git clone https://github.com/mohanraz81/awslogs.git
+  
+  docker -it exec frontend /bin/bash
+  
+  
+  
+  docker -it exec frontend /bin/bash
+  
+  
+  
