@@ -112,3 +112,8 @@
   112  git commit -m "second commmit"
   113  git push
   114  history
+  
+  ---------------- Day 1 commands ends ----------------
+  
+  
+  
