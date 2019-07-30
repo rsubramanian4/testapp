@@ -1,0 +1,40 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: frontend
+    image: knowdocker/myfrontend:1.0
+    depends_on:
+      - backend
+    ports:
+      - "9000:80"
+    volumes:
+      - frontend-var-log:/var/log
+    environment:
+      BACKENDLB: test
+  frontendlog:
+    build:
+      context: awslogs
+    image: knowdocker/frontendlogs:1.0
+    depends_on:
+      - frontend
+    volumes:
+      - frontend-var-log:/mnt/log:ro
+  backend:
+    build:
+      context: backend
+    image: knowdocker/mybackend:1.0
+    volumes:
+      - backend-var-log:/var/log
+  backendlog:
+    build:
+      context: awslogs
+    image: knowdocker/backendlogs:1.0
+    depends_on:
+      - backend
+    volumes:
+      - backend-var-log:/mnt/log:ro
+volumes:
+  frontend-var-log:
+  backend-var-log:
+

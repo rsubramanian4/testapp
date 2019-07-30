@@ -138,6 +138,106 @@ pwd
   112  git commit -m "second commmit"
   113  git push
   114  history
+  ---------------------------------------------------------------------------------------------
+  115  git add *
+  116  git commit -m "day1 commands commmit"
+  117  git push
+  118  exit
+  119  pwd
+  120  cd testapp/
+  121  git add
+  122  git add *
+  123  git commit "lab commit"
+  124  git commit -m "lab commit"
+  125  git push
+  126  cd ..
+  127  docker images
+  128  docker lgin
+  129  docker login
+  130  vi /home/ec2-user/.docker/config.json
+  131  docker build -t knowdocker/myapache:2.0 testapp/frontend/
+  132  docker imges
+  133  docker images
+  134  docker push knowdocker/myapache:2.0
+  135  cd testapp/
+  136  git add *
+  137  git commit -m "added first day notes"
+  138  git push
+  139  cd ..
+  140  docker build -t knowdocker/nginx-php:1.0 testapp/excercise/
+  141  docker run -dit ubuntu:18.04
+  142  docker ps
+  143  docker exec -it hopeful_blackwell /bin/bash
+  144  docker run -dit ubuntu:18.04
+  145  docker exec -it hopeful_blackwell /bin/bash
+  146  docker build -t knowdocker/nginx-php:1.0 testapp/excercise/
+  147  d
+  148  docker images
+  149  docker run -d --name nginx-apache -p 9001:80  knowdocker/nginx-php:1.0
+  150  docker ps
+  151  curl http://localhost:9001
+  152  docker history knowdocker/nginx-php:1.0
+  153  docker images
+  154  docker rm 4188dd4b99bb
+  155  docker image rmi 4188dd4b99bb
+  156  docker image rmi -f 55607ad4ccca
+  157  docker image rmi -f 4188dd4b99bb
+  158  docker images
+  159  docker rmi -f $(docker images -f "dangling=true" -q)
+  160  docker images
+  161  d
+  162  cd testapp/
+  163  git add *
+  164  git commit -m "second docker file"
+  165  git push
+  166  cd 
+  167  pwd
+  168  exit
+  169  docker login
+  170  docker images
+  171  docker push knowdocker/nginx-php:1.0
+  172  curl http://localhost9001
+  173  curl http://localhost:9001
+  174  docker ps -a
+  175  docker ps
+  176  docker rm nginx-apache inspiring_shannon hopeful_blackwell
+  177  docker stop nginx-apache inspiring_shannon hopeful_blackwell
+  178  docker rm nginx-apache inspiring_shannon hopeful_blackwell
+  179  docker images
+  180  docker ps
+  181  docker ps -a
+  182  docker run -d -p 9000:80 --name testapache -v testapache_var_log:/var/log -v /home/ec2-user:/home/ec2-user knowdocker/myapache:1.0
+  183  docker run -d -p 9000:80 --name testapachevolume -v testapache_var_log:/var/log -v /home/ec2-user:/home/ec2-user knowdocker/myapache:1.0
+  184  docker volumes
+  185  docker volume
+  186  docker images
+  187  docker ps
+  188  docker exec testapchevolme /bin/bash
+  189  docker exec testapachevolme /bin/bash
+  190  docker exec -it testapachevolume /bin/bash
+  191  git clone https://githu.commohanraz81/awslogs.git
+  192  git clone https://github.com/mohanraz81/awslogs.git
+  193  ls
+  194  mv ~/.aws ~/.aws_backup
+  195  docker build -t mohanraz81/awslogs:1.0 /awslogs
+  196  docker build -t mohanraz81/awslogs:1.0 awslogs/
+  197  docker run -d --name logagent -v testapache_var_log
+  198  docker run -d --name logagent -v testapache_var_log  mohanraz81/awslogs:1.0
+  199  docker rm logagent
+  200  docker stop logagent
+  201  docker run -d --name logagent -v testapache_var_log:/mnt/log:ro  mohanraz81/awslogs:1.0 
+  202  docker rm logagent
+  203  docker run -d --name logagent -v testapache_var_log:/mnt/log:ro  mohanraz81/awslogs:1.0 
+  204  docker exec -it logagent bash/bin
+  205  docker exec -it logagent /bin/sh
+  206  docker history
+  207  docker images
+  208  cd testapp/
+  209  git add *
+  210  git commit -m "after network"
+  211  git push
+  212  cd ..
+  213  history
   
   ---------------- Day 1 commands ends ----------------
   
@@ -170,5 +270,17 @@ pwd
   
   docker -it exec frontend /bin/bash
   
+ container 
+ run,stop start 
+ 
+ 
+ build images pull push tag 
+ 
+ 
+ 
+ hub
+ login
+ search
+ inspect
   
   
