@@ -616,5 +616,1276 @@ pwd
  login
  search
  inspect
+ 
+----------------------------------
+installation of kubernates
+
+AP-ROLE-NAME6:~/environment $ mv ~/.aws ~/.aws_backup
+AP-ROLE-NAME6:~/environment $ mv ~/.aws ~/.aws_backup
+mv: cannot stat ‘/home/ec2-user/.aws’: No such file or directory
+AP-ROLE-NAME6:~/environment $ pip install awscli --upgrade --user
+
+Collecting awscli
+  Downloading https://files.pythonhosted.org/packages/6a/82/99ed4bfad39ace624a5a547b96e520b8f61a01348758c277f0a79aeeb315/awscli-1.16.209-py2.py3-none-any.whl (1.8MB)
+    100% |████████████████████████████████| 1.8MB 680kB/s 
+Requirement already up-to-date: colorama<=0.3.9,>=0.2.5 in /usr/local/lib/python2.7/site-packages (from awscli)
+Requirement already up-to-date: rsa<=3.5.0,>=3.1.2 in /usr/local/lib/python2.7/site-packages (from awscli)
+Requirement already up-to-date: docutils<0.15,>=0.10 in /usr/local/lib/python2.7/site-packages (from awscli)
+Requirement already up-to-date: s3transfer<0.3.0,>=0.2.0 in /usr/local/lib/python2.7/site-packages (from awscli)
+Collecting PyYAML<=5.1,>=3.10; python_version != "2.6" (from awscli)
+  Downloading https://files.pythonhosted.org/packages/9f/2c/9417b5c774792634834e730932745bc09a7d36754ca00acf1ccd1ac2594d/PyYAML-5.1.tar.gz (274kB)
+    100% |████████████████████████████████| 276kB 3.7MB/s 
+Collecting botocore==1.12.199 (from awscli)
+  Downloading https://files.pythonhosted.org/packages/50/f8/dbe656ee191c2d8b471a86fa07f0d37515611d865deaa034fc2b71dd71e4/botocore-1.12.199-py2.py3-none-any.whl (5.6MB)
+    100% |████████████████████████████████| 5.6MB 206kB/s 
+Requirement already up-to-date: pyasn1>=0.1.3 in /usr/local/lib/python2.7/site-packages (from rsa<=3.5.0,>=3.1.2->awscli)
+Requirement already up-to-date: futures<4.0.0,>=2.2.0; python_version == "2.6" or python_version == "2.7" in /usr/local/lib/python2.7/site-packages (from s3transfer<0.3.0,>=0.2.0->awscli)
+Collecting urllib3<1.26,>=1.20; python_version == "2.7" (from botocore==1.12.199->awscli)
+  Downloading https://files.pythonhosted.org/packages/e6/60/247f23a7121ae632d62811ba7f273d0e58972d75e58a94d329d51550a47d/urllib3-1.25.3-py2.py3-none-any.whl (150kB)
+    100% |████████████████████████████████| 153kB 6.7MB/s 
+Requirement already up-to-date: python-dateutil<3.0.0,>=2.1; python_version >= "2.7" in /usr/local/lib/python2.7/site-packages (from botocore==1.12.199->awscli)
+Requirement already up-to-date: jmespath<1.0.0,>=0.7.1 in /usr/local/lib/python2.7/site-packages (from botocore==1.12.199->awscli)
+Requirement already up-to-date: six>=1.5 in /usr/local/lib/python2.7/site-packages (from python-dateutil<3.0.0,>=2.1; python_version >= "2.7"->botocore==1.12.199->awscli)
+Building wheels for collected packages: PyYAML
+  Running setup.py bdist_wheel for PyYAML ... done
+  Stored in directory: /home/ec2-user/.cache/pip/wheels/ad/56/bc/1522f864feb2a358ea6f1a92b4798d69ac783a28e80567a18b
+Successfully built PyYAML
+Installing collected packages: PyYAML, urllib3, botocore, awscli
+Successfully installed PyYAML-5.1 awscli-1.16.209 botocore-1.12.199 urllib3-1.25.3
+You are using pip version 9.0.3, however version 19.2.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 17.7M  100 17.7M    0     0  10.0M      0  0:00:01  0:00:01 --:--:-- 10.0M
+AP-ROLE-NAME6:~/environment $ chmod +x ./aws-iam-authenticator
+AP-ROLE-NAME6:~/environment $ mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
+AP-ROLE-NAME6:~/environment $ echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+AP-ROLE-NAME6:~/environment $ aws-iam-authenticator help
+A tool to authenticate to Kubernetes using AWS IAM credentials
+
+Usage:
+  aws-iam-authenticator [command]
+
+Available Commands:
+  help        Help about any command
+  init        Pre-generate certificate, private key, and kubeconfig files for the server.
+  server      Run a webhook validation server suitable that validates tokens using AWS IAM
+  token       Authenticate using AWS IAM and get token for Kubernetes
+  verify      Verify a token for debugging purpose
+  version     Version will output the current build information
+
+Flags:
+  -i, --cluster-id ID       Specify the cluster ID, a unique-per-cluster identifier for your aws-iam-authenticator installation.
+  -c, --config filename     Load configuration from filename
+  -h, --help                help for aws-iam-authenticator
+  -l, --log-format string   Specify log format to use when logging to stderr [text or json] (default "text")
+
+Use "aws-iam-authenticator [command] --help" for more information about a command.
+AP-ROLE-NAME6:~/environment $ curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+AP-ROLE-NAME6:~/environment $ sudo mv /tmp/eksctl /usr/local/bin
+AP-ROLE-NAME6:~/environment $ eksctl version
+[ℹ]  version.Info{BuiltAt:"", GitCommit:"", GitTag:"0.2.1"}
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.small \
+> --nodes 3 \
+> --nodes-min 3 \
+> --nodes-max 3 \
+> --node-ami auto
+[ℹ]  using region us-west-2
+[ℹ]  setting availability zones to [us-west-2b us-west-2c us-west-2d]
+[ℹ]  subnets for us-west-2b - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-west-2c - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-west-2d - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-03a55127c613349a7" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-west-2" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-west-2 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  deploying stack "eksctl-prod-cluster"
+
+[ℹ]  building nodegroup stack "eksctl-prod-nodegroup-standard-workers"
+[ℹ]  deploying stack "eksctl-prod-nodegroup-standard-workers"
+[✔]  all EKS cluster resource for "prod" had been created
+[✔]  saved kubeconfig as "/home/ec2-user/.kube/config"
+[ℹ]  adding role "arn:aws:iam::960252834999:role/eksctl-prod-nodegroup-standard-wo-NodeInstanceRole-1GEWW2DU7JVJ5" to auth ConfigMap
+[ℹ]  nodegroup "standard-workers" has 0 node(s)
+[ℹ]  waiting for at least 3 node(s) to become ready in "standard-workers"
+[ℹ]  nodegroup "standard-workers" has 3 node(s)
+[ℹ]  node "ip-192-168-0-101.us-west-2.compute.internal" is ready
+[ℹ]  node "ip-192-168-54-208.us-west-2.compute.internal" is ready
+[ℹ]  node "ip-192-168-58-50.us-west-2.compute.internal" is ready
+[✖]  kubectl not found, v1.10.0 or newever is required
+[ℹ]  cluster should be functional despite missing (or misconfigured) client binaries
+[✔]  EKS cluster "prod" in "us-west-2" region is ready
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+bash: $: command not found
+AP-ROLE-NAME6:~/environment $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 40.9M  100 40.9M    0     0  54.3M      0 --:--:-- --:--:-- --:--:-- 54.2M
+AP-ROLE-NAME6:~/environment $ chmod +x ./kubectl
+AP-ROLE-NAME6:~/environment $ sudo mv ./kubectl /usr/local/bin/kubectl
+AP-ROLE-NAME6:~/environment $ kubectl version
+Client Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.1", GitCommit:"4485c6f18cee9a5d3c3b4e523bd27972b1b53892", GitTreeState:"clean", BuildDate:"2019-07-18T09:18:22Z", GoVersion:"go1.12.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"13+", GitVersion:"v1.13.7-eks-c57ff8", GitCommit:"c57ff8e35590932c652433fab07988da79265d5b", GitTreeState:"clean", BuildDate:"2019-06-07T20:43:03Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-0-101.us-west-2.compute.internal    Ready    <none>   11m   v1.13.7-eks-c57ff8
+ip-192-168-54-208.us-west-2.compute.internal   Ready    <none>   11m   v1.13.7-eks-c57ff8
+ip-192-168-58-50.us-west-2.compute.internal    Ready    <none>   11m   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-0-101.us-west-2.compute.internal    Ready    <none>   21m   v1.13.7-eks-c57ff8
+ip-192-168-54-208.us-west-2.compute.internal   Ready    <none>   21m   v1.13.7-eks-c57ff8
+ip-192-168-58-50.us-west-2.compute.internal    Ready    <none>   21m   v1.13.7-eks-c57ff8
   
-  
+
+
+
+kubectl get <hname>s
+kubectl describe <hname> <name of resource>
+
+
+kubectl create <hname> <options>
+kubectl create -f <file name>
+kubectl update -f <file name>
+
+kubectl apply -f <file name>
+
+kubectl delete <h name> <name of resources>
+
+kubectl logs <pod name> <container name>
+
+kubectl exec -it <pod name> <commands>
+
+
+kubectl get <hname>s
+kubectl describe <hname> <name of the resource>
+
+create
+kubectl create <hname> <options>
+kubectl create -f <file name>
+kubectl update -f <file name >
+
+kubectl apply -f <file name>
+
+kubectl delete <h name> <name of the resource>
+
+kubectl logs <pod name> <contname >
+kubectl exec -it <pod name > <command>
+
+
+pods state
+creating
+pending
+running
+imagepullbackerror
+crashloopbackerror
+succeded
+failed
+
+
+
+
+
+
+eksctl delete cluster --region us-east-1 --name prod
+
+eksctl delete cluster --region us-west-2 --name prod
+
+---------history at day 3 end ----
+
+P-ROLE-NAME6:~/environment $ history
+    1  pwd
+    2  ls
+    3  sudo yum -y install docker
+    4  docker info
+    5  whoami
+    6  sudo usermod -a -G docker ec2-user
+    7  id -a
+    8  sudo service docker start
+    9  sudo chkconfig docker on
+   10  history
+   11  sudo service docker status
+   12  docker info
+   13  ll
+   14  docker pull http:2.4
+   15  docker pull httpd:2.4
+   16  docker images
+   17  docker inspect httpd
+   18  docker inspect httpd:2.4
+   19  history
+   20  docker run -d --name testapache httpd2.4
+   21  docker run -d --name testapache httpd:2.4
+   22  docker ps -a
+   23  docker stop testapache
+   24  docker p
+   25  docker ps
+   26  docker ps -a
+   27  git clone https://github.com/rsubramanian4/testapp.git
+   28  docker build -t knowdocker/myapache:1.0 testapp/frontend/
+   29  docker images
+   30  docker inspect e32ae41a4574
+   31  history
+   32  docker ps
+   33  docke images
+   34  dockr images
+   35  docker images
+   36  docker run -d --name myapache knowdocker/myapache:1.0
+   37  docker ps
+   38  docker logs myapache
+   39  docker stop myapache
+   40  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   41  docker run -d --name myapache9 -p 9000:80  knowdocker/myapache:1.0
+   42  curl http://localhost
+   43  curl http://localhost:9000
+   44  history
+   45  curl http://localhost:9000
+   46  docker conatiner -rm myapache
+   47  docker stop myapache
+   48  docker rm myapache
+   49  docker stop myapache9
+   50  docker rm myapache9
+   51  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   52  curl http://localhost:9000
+   53  docker push knowdocker/myapache:1.0
+   54  ll
+   55  git commit 
+   56  git commit https://github.com/rsubramanian4/testapp.git
+   57  cd testapp/
+   58  git commit https://github.com/rsubramanian4/testapp.git
+   59  ll
+   60  cd ..
+   61  ll
+   62  docker login
+   63  docker login -u "knowdocker" -p "Dock$2474"
+   64  docker login -u knowdocker -p Dock$2474
+   65  docker login -uknowdocker -pDock$2474
+   66  docker login -u knowdocker -p Dock$2474
+   67  https://github.com/rsubramanian4/testapp.git
+   68  LL
+   69  ll
+   70  cd testapp/
+   71  ll
+   72  git commit
+   73  git push
+   74  git stage
+   75  exit
+   76  pwd
+   77  ll
+   78  exit
+   79  docker ps
+   80  docker ps -
+   81  docker ps -a
+   82  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   83  docker start myapache
+   84  docker ps
+   85  docket login
+   86  docker login
+   87  docker push myapache:1.0
+   88  docker push knowdocker/myapache:1.0
+   89  cd testapp/
+   90  ll
+   91  git add *
+   92  git commit -m "first commit"
+   93  git config --global
+   94  git config
+   95  git config --global
+   96  git config
+   97  git config --global --list
+   98  git init
+   99  vi .git
+  100  git commit -m "first commit"
+  101  git push
+  102  history
+  103  git commit -m "test commmit"
+  104  git add *
+  105  git commit -m "test commmit"
+  106  git push
+  107  git config --global user.name "rsubramanian4"
+  108  git config --global user.email mailtoraja.s@gmail.com
+  109  git config --list
+  110  git add
+  111  git add *
+  112  git commit -m "second commmit"
+  113  git push
+  114  history
+  115  git add *
+  116  git commit -m "day1 commands commmit"
+  117  git push
+  118  exit
+  119  pwd
+  120  cd testapp/
+  121  git add
+  122  git add *
+  123  git commit "lab commit"
+  124  git commit -m "lab commit"
+  125  git push
+  126  cd ..
+  127  docker images
+  128  docker lgin
+  129  docker login
+  130  vi /home/ec2-user/.docker/config.json
+  131  docker build -t knowdocker/myapache:2.0 testapp/frontend/
+  132  docker imges
+  133  docker images
+  134  docker push knowdocker/myapache:2.0
+  135  cd testapp/
+  136  git add *
+  137  git commit -m "added first day notes"
+  138  git push
+  139  cd ..
+  140  docker build -t knowdocker/nginx-php:1.0 testapp/excercise/
+  141  docker run -dit ubuntu:18.04
+  142  docker ps
+  143  docker exec -it hopeful_blackwell /bin/bash
+  144  docker run -dit ubuntu:18.04
+  145  docker exec -it hopeful_blackwell /bin/bash
+  146  docker build -t knowdocker/nginx-php:1.0 testapp/excercise/
+  147  d
+  148  docker images
+  149  docker run -d --name nginx-apache -p 9001:80  knowdocker/nginx-php:1.0
+  150  docker ps
+  151  curl http://localhost:9001
+  152  docker history knowdocker/nginx-php:1.0
+  153  docker images
+  154  docker rm 4188dd4b99bb
+  155  docker image rmi 4188dd4b99bb
+  156  docker image rmi -f 55607ad4ccca
+  157  docker image rmi -f 4188dd4b99bb
+  158  docker images
+  159  docker rmi -f $(docker images -f "dangling=true" -q)
+  160  docker images
+  161  d
+  162  cd testapp/
+  163  git add *
+  164  git commit -m "second docker file"
+  165  git push
+  166  cd 
+  167  pwd
+  168  exit
+  169  docker login
+  170  docker images
+  171  docker push knowdocker/nginx-php:1.0
+  172  curl http://localhost9001
+  173  curl http://localhost:9001
+  174  docker ps -a
+  175  docker ps
+  176  docker rm nginx-apache inspiring_shannon hopeful_blackwell
+  177  docker stop nginx-apache inspiring_shannon hopeful_blackwell
+  178  docker rm nginx-apache inspiring_shannon hopeful_blackwell
+  179  docker images
+  180  docker ps
+  181  docker ps -a
+  182  docker ps
+  183  docker images
+  184  docker run -d -p 9000:80 --name testapache -v testapache_var_log:/var/log -v /home/ec2-user:/home/ec2-user knowdocker/myapache:1.0
+  185  docker run -d -p 9000:80 --name testapachevolume -v testapache_var_log:/var/log -v /home/ec2-user:/home/ec2-user knowdocker/myapache:1.0
+  186  docker volumes
+  187  docker volume
+  188  docker images
+  189  docker ps
+  190  docker exec testapchevolme /bin/bash
+  191  docker exec testapachevolme /bin/bash
+  192  cd /home/
+  193  ls
+  194  cd ec2-user/
+  195  ll
+  196  ls
+  197  docker volumes
+  198  docker volume
+  199  docker volume ls
+  200  docker exec -it testapachevolume /bin/bash
+  201  git clone https://githu.commohanraz81/awslogs.git
+  202  git clone https://github.com/mohanraz81/awslogs.git
+  203  ls
+  204  mv ~/.aws ~/.aws_backup
+  205  docker build -t mohanraz81/awslogs:1.0 /awslogs
+  206  docker build -t mohanraz81/awslogs:1.0 awslogs/
+  207  docker run -d --name logagent -v testapache_var_log
+  208  docker run -d --name logagent -v testapache_var_log  mohanraz81/awslogs:1.0
+  209  docker rm logagent
+  210  docker stop logagent
+  211  docker run -d --name logagent -v testapache_var_log:/mnt/log:ro  mohanraz81/awslogs:1.0 
+  212  docker rm logagent
+  213  docker run -d --name logagent -v testapache_var_log:/mnt/log:ro  mohanraz81/awslogs:1.0 
+  214  docker exec -it logagent bash/bin
+  215  curl http://localost:9000
+  216  curl http://localhost:9000
+  217  docker network ls
+  218  docker network ps
+  219  docker ps -a
+  220  docker ps
+  221  docker exec -it logagent /bin/sh
+  222  docker stop logagent testapachevolume
+  223  docker rm logagent testapachevolume
+  224  docker ps
+  225  docker ps -a
+  226  docker network ls
+  227  ifconfg -a|more
+  228  ifconfig -a|more
+  229  docker inspect bridge
+  230  docker network create --drive=bridge --subnet 10.1.0.0/16 --gateway 10.1.0.1 testnw
+  231  docker network create --driver=bridge --subnet 10.1.0.0/16 --gateway 10.1.0.1 testnw
+  232  docker network ls
+  233  docker history
+  234  docker images
+  235  docker run -d -p 9000:80 --name frontend --net testnw knowdocker/myapache:2.0
+  236  docker run -d -p  --name backend --net testnw knowdocker/myapache:2.0
+  237  docker run -d  --name backend --net testnw knowdocker/myapache:2.0
+  238  docker ps
+  239  docker inspect testnw
+  240  curl http://frontend
+  241  docker exec -it  frontend bash/bin
+  242  docker exec -it  frontend bash\bin
+  243  docker exec -it  frontend "bash\bin"
+  244  docker exec -it  frontend "bin bash"
+  245  docker exec -it  frontend bin bash
+  246  docker stop frontend backend
+  247  docker rm testnw
+  248  docker --net rm testnw
+  249  docker network rm testnw
+  250  docker run -d -p  --name backend  knowdocker/myapache:2.0
+  251  docker run -d  --name backend  knowdocker/myapache:2.0
+  252  docker rm frontend backend
+  253  docker run -d  --name backend  knowdocker/myapache:2.0
+  254  docker run -d -p 9000:80 --name frontend --net testnw knowdocker/myapache:2.0
+  255  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0
+  256  docker rm fronend
+  257  docker rm frontend
+  258  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend
+  259  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend knowdocker/myapache
+  260  docker ps
+  261  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend knowdocker/myapache:2.0
+  262  docker ps
+  263  docker rm frontend
+  264  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend knowdocker/myapache:2.0
+  265  docker run -d -p 9000:80 --name frontend  --link backend knowdocker/myapache:2.0
+  266  docker rm frontend
+  267  docker run -d -p 9000:80 --name frontend  --link backend knowdocker/myapache:2.0
+  268  curl http://frontend
+  269  curl http://frontend:9000
+  270  docker -it exec frontend /bin/bash
+  271  docker exec -it  frontend /bin/bash
+  272  cd testapp
+  273  ls
+  274  cd testapp/
+  275  git add *
+  276  git commit -m "after network"
+  277  git push
+  278  cd ..
+  279  history
+  280  sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  281  sudo chmod +x /usr/local/bin/docker-compose
+  282  docker-compose
+  283  docker images
+  284  docker ps
+  285  cd testapp/
+  286  docker-compose build
+  287  docker images
+  288  docker-compose build
+  289  docker images
+  290  docker ps
+  291  docker stop frontend backend
+  292  docker rm frontend backend
+  293  docker-compose up -d 
+  294  docker ps
+  295  docker-compose down
+  296  git add *
+  297  git commit -m "docker-compose"
+  298  git push
+  299  docker-compose down
+  300  docker ps
+  301  docker ps -a
+  302  history
+  303  docker-compose push
+  304  history
+  305  h
+  306  cd testapp/
+  307  git add *
+  308  git commit -m "end of 2nd day commit"
+  309  git push
+  310  exit
+  311  mv ~/.aws ~/.aws_backup
+  312  pip install awscli --upgrade --user
+  313  curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator
+  314  chmod +x ./aws-iam-authenticator
+  315  mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
+  316  echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+  317  aws-iam-authenticator help
+  318  curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+  319  sudo mv /tmp/eksctl /usr/local/bin
+  320  eksctl version
+  321  eksctl create cluster --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto
+  322  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  323  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  324  chmod +x ./kubectl
+  325  sudo mv ./kubectl /usr/local/bin/kubectl
+  326  kubectl version
+  327  kubectl get nodes
+  328  kubectl get prod
+  329  kubectl get clusters
+  330  kubectl get nodes
+  331  kubectl get cluster
+  332  kubectl get pods
+  333  kubectl get nods
+  334  kubectl get nodes
+  335  kubectl cat ~/.kube/config
+  336   cat ~/.kube/config
+  337  kubectl pods
+  338  kubectl get pods
+  339  kubectl describe cluster prod
+  340  kubectl describe node 
+  341  kubectl describe node ip-192-168-0-101.us-west-2.compute.internal
+  342  kubectl get namespaces
+  343  kubectl get pods --namespace=kube-system
+  344  kubectl get pods --namespace=kube-public
+  345  kubectl get svc --namespace=kube-public
+  346  kubectl create namespace test
+  347  kubectl get namespace
+  348  kubectl describe test
+  349  kubectl describe namespace test
+  350  kubectl config set-context $(kubectl config current-context) --namespace=test
+  351  kubectl config view | grep namespace:test
+  352  kubectl config view | grep namespace: test
+  353  kubectl config view | grep namespace test
+  354  kubectl config view | grep namespace
+  355  kubectl config view
+  356  kubectl config view | grep namespace
+  357  kubectl apply -f testapp/deploy.yml
+  358  kubectl get deployment
+  359  kubectl describe deployment apache-deployment
+  360  kubectl describe rs apache-deployment-b8bf884b
+  361  kubectl events
+  362  kubectl get service
+  363  history
+AP-ROLE-NAME6:~/environment $ 
+
+------------------------------------day3 full console -------------------------
+
+
+AP-ROLE-NAME6:~/environment $ mv ~/.aws ~/.aws_backup
+AP-ROLE-NAME6:~/environment $ mv ~/.aws ~/.aws_backup
+mv: cannot stat ‘/home/ec2-user/.aws’: No such file or directory
+AP-ROLE-NAME6:~/environment $ pip install awscli --upgrade --user
+
+Collecting awscli
+  Downloading https://files.pythonhosted.org/packages/6a/82/99ed4bfad39ace624a5a547b96e520b8f61a01348758c277f0a79aeeb315/awscli-1.16.209-py2.py3-none-any.whl (1.8MB)
+    100% |████████████████████████████████| 1.8MB 680kB/s 
+Requirement already up-to-date: colorama<=0.3.9,>=0.2.5 in /usr/local/lib/python2.7/site-packages (from awscli)
+Requirement already up-to-date: rsa<=3.5.0,>=3.1.2 in /usr/local/lib/python2.7/site-packages (from awscli)
+Requirement already up-to-date: docutils<0.15,>=0.10 in /usr/local/lib/python2.7/site-packages (from awscli)
+Requirement already up-to-date: s3transfer<0.3.0,>=0.2.0 in /usr/local/lib/python2.7/site-packages (from awscli)
+Collecting PyYAML<=5.1,>=3.10; python_version != "2.6" (from awscli)
+  Downloading https://files.pythonhosted.org/packages/9f/2c/9417b5c774792634834e730932745bc09a7d36754ca00acf1ccd1ac2594d/PyYAML-5.1.tar.gz (274kB)
+    100% |████████████████████████████████| 276kB 3.7MB/s 
+Collecting botocore==1.12.199 (from awscli)
+  Downloading https://files.pythonhosted.org/packages/50/f8/dbe656ee191c2d8b471a86fa07f0d37515611d865deaa034fc2b71dd71e4/botocore-1.12.199-py2.py3-none-any.whl (5.6MB)
+    100% |████████████████████████████████| 5.6MB 206kB/s 
+Requirement already up-to-date: pyasn1>=0.1.3 in /usr/local/lib/python2.7/site-packages (from rsa<=3.5.0,>=3.1.2->awscli)
+Requirement already up-to-date: futures<4.0.0,>=2.2.0; python_version == "2.6" or python_version == "2.7" in /usr/local/lib/python2.7/site-packages (from s3transfer<0.3.0,>=0.2.0->awscli)
+Collecting urllib3<1.26,>=1.20; python_version == "2.7" (from botocore==1.12.199->awscli)
+  Downloading https://files.pythonhosted.org/packages/e6/60/247f23a7121ae632d62811ba7f273d0e58972d75e58a94d329d51550a47d/urllib3-1.25.3-py2.py3-none-any.whl (150kB)
+    100% |████████████████████████████████| 153kB 6.7MB/s 
+Requirement already up-to-date: python-dateutil<3.0.0,>=2.1; python_version >= "2.7" in /usr/local/lib/python2.7/site-packages (from botocore==1.12.199->awscli)
+Requirement already up-to-date: jmespath<1.0.0,>=0.7.1 in /usr/local/lib/python2.7/site-packages (from botocore==1.12.199->awscli)
+Requirement already up-to-date: six>=1.5 in /usr/local/lib/python2.7/site-packages (from python-dateutil<3.0.0,>=2.1; python_version >= "2.7"->botocore==1.12.199->awscli)
+Building wheels for collected packages: PyYAML
+  Running setup.py bdist_wheel for PyYAML ... done
+  Stored in directory: /home/ec2-user/.cache/pip/wheels/ad/56/bc/1522f864feb2a358ea6f1a92b4798d69ac783a28e80567a18b
+Successfully built PyYAML
+Installing collected packages: PyYAML, urllib3, botocore, awscli
+Successfully installed PyYAML-5.1 awscli-1.16.209 botocore-1.12.199 urllib3-1.25.3
+You are using pip version 9.0.3, however version 19.2.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 17.7M  100 17.7M    0     0  10.0M      0  0:00:01  0:00:01 --:--:-- 10.0M
+AP-ROLE-NAME6:~/environment $ chmod +x ./aws-iam-authenticator
+AP-ROLE-NAME6:~/environment $ mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
+AP-ROLE-NAME6:~/environment $ echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+AP-ROLE-NAME6:~/environment $ aws-iam-authenticator help
+A tool to authenticate to Kubernetes using AWS IAM credentials
+
+Usage:
+  aws-iam-authenticator [command]
+
+Available Commands:
+  help        Help about any command
+  init        Pre-generate certificate, private key, and kubeconfig files for the server.
+  server      Run a webhook validation server suitable that validates tokens using AWS IAM
+  token       Authenticate using AWS IAM and get token for Kubernetes
+  verify      Verify a token for debugging purpose
+  version     Version will output the current build information
+
+Flags:
+  -i, --cluster-id ID       Specify the cluster ID, a unique-per-cluster identifier for your aws-iam-authenticator installation.
+  -c, --config filename     Load configuration from filename
+  -h, --help                help for aws-iam-authenticator
+  -l, --log-format string   Specify log format to use when logging to stderr [text or json] (default "text")
+
+Use "aws-iam-authenticator [command] --help" for more information about a command.
+AP-ROLE-NAME6:~/environment $ curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+AP-ROLE-NAME6:~/environment $ sudo mv /tmp/eksctl /usr/local/bin
+AP-ROLE-NAME6:~/environment $ eksctl version
+[ℹ]  version.Info{BuiltAt:"", GitCommit:"", GitTag:"0.2.1"}
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.small \
+> --nodes 3 \
+> --nodes-min 3 \
+> --nodes-max 3 \
+> --node-ami auto
+[ℹ]  using region us-west-2
+[ℹ]  setting availability zones to [us-west-2b us-west-2c us-west-2d]
+[ℹ]  subnets for us-west-2b - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-west-2c - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-west-2d - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-03a55127c613349a7" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-west-2" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-west-2 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  deploying stack "eksctl-prod-cluster"
+
+[ℹ]  building nodegroup stack "eksctl-prod-nodegroup-standard-workers"
+[ℹ]  deploying stack "eksctl-prod-nodegroup-standard-workers"
+[✔]  all EKS cluster resource for "prod" had been created
+[✔]  saved kubeconfig as "/home/ec2-user/.kube/config"
+[ℹ]  adding role "arn:aws:iam::960252834999:role/eksctl-prod-nodegroup-standard-wo-NodeInstanceRole-1GEWW2DU7JVJ5" to auth ConfigMap
+[ℹ]  nodegroup "standard-workers" has 0 node(s)
+[ℹ]  waiting for at least 3 node(s) to become ready in "standard-workers"
+[ℹ]  nodegroup "standard-workers" has 3 node(s)
+[ℹ]  node "ip-192-168-0-101.us-west-2.compute.internal" is ready
+[ℹ]  node "ip-192-168-54-208.us-west-2.compute.internal" is ready
+[ℹ]  node "ip-192-168-58-50.us-west-2.compute.internal" is ready
+[✖]  kubectl not found, v1.10.0 or newever is required
+[ℹ]  cluster should be functional despite missing (or misconfigured) client binaries
+[✔]  EKS cluster "prod" in "us-west-2" region is ready
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+bash: $: command not found
+AP-ROLE-NAME6:~/environment $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 40.9M  100 40.9M    0     0  54.3M      0 --:--:-- --:--:-- --:--:-- 54.2M
+AP-ROLE-NAME6:~/environment $ chmod +x ./kubectl
+AP-ROLE-NAME6:~/environment $ sudo mv ./kubectl /usr/local/bin/kubectl
+AP-ROLE-NAME6:~/environment $ kubectl version
+Client Version: version.Info{Major:"1", Minor:"15", GitVersion:"v1.15.1", GitCommit:"4485c6f18cee9a5d3c3b4e523bd27972b1b53892", GitTreeState:"clean", BuildDate:"2019-07-18T09:18:22Z", GoVersion:"go1.12.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"13+", GitVersion:"v1.13.7-eks-c57ff8", GitCommit:"c57ff8e35590932c652433fab07988da79265d5b", GitTreeState:"clean", BuildDate:"2019-06-07T20:43:03Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-0-101.us-west-2.compute.internal    Ready    <none>   11m   v1.13.7-eks-c57ff8
+ip-192-168-54-208.us-west-2.compute.internal   Ready    <none>   11m   v1.13.7-eks-c57ff8
+ip-192-168-58-50.us-west-2.compute.internal    Ready    <none>   11m   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-0-101.us-west-2.compute.internal    Ready    <none>   21m   v1.13.7-eks-c57ff8
+ip-192-168-54-208.us-west-2.compute.internal   Ready    <none>   21m   v1.13.7-eks-c57ff8
+ip-192-168-58-50.us-west-2.compute.internal    Ready    <none>   21m   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-0-101.us-west-2.compute.internal    Ready    <none>   75m   v1.13.7-eks-c57ff8
+ip-192-168-54-208.us-west-2.compute.internal   Ready    <none>   75m   v1.13.7-eks-c57ff8
+ip-192-168-58-50.us-west-2.compute.internal    Ready    <none>   75m   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl get prod
+error: the server doesn't have a resource type "prod"
+AP-ROLE-NAME6:~/environment $ kubectl get clusters
+error: the server doesn't have a resource type "clusters"
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-0-101.us-west-2.compute.internal    Ready    <none>   83m   v1.13.7-eks-c57ff8
+ip-192-168-54-208.us-west-2.compute.internal   Ready    <none>   83m   v1.13.7-eks-c57ff8
+ip-192-168-58-50.us-west-2.compute.internal    Ready    <none>   83m   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl get cluster
+error: the server doesn't have a resource type "cluster"
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+No resources found.
+AP-ROLE-NAME6:~/environment $ kubectl get nods
+error: the server doesn't have a resource type "nods"
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-0-101.us-west-2.compute.internal    Ready    <none>   84m   v1.13.7-eks-c57ff8
+ip-192-168-54-208.us-west-2.compute.internal   Ready    <none>   84m   v1.13.7-eks-c57ff8
+ip-192-168-58-50.us-west-2.compute.internal    Ready    <none>   84m   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl cat ~/.kube/config
+Error: unknown command "cat" for "kubectl"
+
+Did you mean this?
+        set
+        get
+        cp
+        wait
+
+Run 'kubectl --help' for usage.
+unknown command "cat" for "kubectl"
+
+Did you mean this?
+        set
+        get
+        cp
+        wait
+
+AP-ROLE-NAME6:~/environment $  cat ~/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFNU1EY3pNVEE1TXpFeU1sb1hEVEk1TURjeU9EQTVNekV5TWxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBS3BjCldvSkxOWC9aaVJSU3dkbERVYlZKYk5LMk5Fa2JMRUJvNzZtQnZSVWx4aVNhK1BVeDBhYTdDTkhQSDRUdU0ySE0KSFpCbmd4YXBKemRxLzhEVi9SMlFtZEMwTm15cEdwU2pjZjIwdTlyNGRCS2ZWckRHdmJOZEgxOUlFSUZOY2FhMgpwdFZSNlBnRTR4eGhMUXJxNUhjQjdMbWswR3Y2VnlyK1dYc2JKZFFXbTBWRE9pTUQzVDdmaXpJcjBuenVaNDhPCkNaczV3RWptQXZWKzlvZ1VVcHo5dEVqSllnN0hyR0tJYXBLNUEyc3lSTzhjLzIxU00zMHpYT1NsYnZxd0JDZGYKeHlhZEQ3NDRGOUtUbzI2bU1ZMzlxU05waFBBcVVNRHVZa2RXa0pFUUhRUjZRbkNBWkZUenk1eUxIZEZXTFZlRQpYaWNlN2QrWVYwQkdXdzBCeTNFQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFIWnpFVFpVQjNuTThKdWQ2d0hwYkRGV1FpNEoKWFYzWC9YQVRTZFdyS0FwNFBVN3lQelpvdGdGM1NRaUQ0ZkdGRkxkeUluSDJlcXhuQnZlTU92OXBGWE5HQ1plMgpjekVHZkNYZmF5NE1iU2pLQW5VU2MyZVUvWVZiQ3JpeGo5SnFDQ3Rzd2tCT0hrQWlpYjN0ZmRNUjFvNkNYcnhTClI3QllyejRSWS9DQ2tKdERVd1B4WDYydFpSUnhiV29lM1B5bzNRd25OZDBoQ1dmZVcvK3dIRkwwUllCbm1zRloKV3V5c1Y4ZDZwVWdFczRBeHRhbHQ3WkM5bjlhRjNudHhFLzBObnMxcmt4d2ZPVWIwOGtJWTl2ZnFMYkJ0aEFqSwpPMFVwc2Z0dHd6MFQ5NGt0dlNibDFKbmlHOVVYMXRha1RWK2M2SW92b2E2alYrUVp2bWR3dUlITFVtQT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://1ACBAAC34B192448FCDCE05EDE9B0287.sk1.us-west-2.eks.amazonaws.com
+  name: prod.us-west-2.eksctl.io
+contexts:
+- context:
+    cluster: prod.us-west-2.eksctl.io
+    user: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+  name: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+current-context: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+kind: Config
+preferences: {}
+users:
+- name: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1alpha1
+      args:
+      - token
+      - -i
+      - prod
+      command: aws-iam-authenticator
+      env: null
+AP-ROLE-NAME6:~/environment $ kubectl pods
+Error: unknown command "pods" for "kubectl"
+
+Did you mean this?
+        logs
+
+Run 'kubectl --help' for usage.
+unknown command "pods" for "kubectl"
+
+Did you mean this?
+        logs
+
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+No resources found.
+AP-ROLE-NAME6:~/environment $ kubectl describe cluster prod
+error: the server doesn't have a resource type "cluster"
+AP-ROLE-NAME6:~/environment $ kubectl describe node 
+Name:               ip-192-168-0-101.us-west-2.compute.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-0e5e35089ba27e535
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.small
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-west-2
+                    failure-domain.beta.kubernetes.io/zone=us-west-2b
+                    kubernetes.io/hostname=ip-192-168-0-101.us-west-2.compute.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 31 Jul 2019 09:39:55 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:55 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:55 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:55 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:40:15 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.0.101
+  ExternalIP:   34.210.108.18
+  InternalDNS:  ip-192-168-0-101.us-west-2.compute.internal
+  ExternalDNS:  ec2-34-210-108-18.us-west-2.compute.amazonaws.com
+  Hostname:     ip-192-168-0-101.us-west-2.compute.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      2002400Ki
+ pods:                        11
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      1900000Ki
+ pods:                        11
+System Info:
+ Machine ID:                 ec29de9536aaad01445d9a022a566f28
+ System UUID:                EC29DE95-36AA-AD01-445D-9A022A566F28
+ Boot ID:                    b95b0a52-eaf0-4ee6-955d-97e3aa7a9a4f
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-west-2b/i-0e5e35089ba27e535
+Non-terminated Pods:         (4 in total)
+  Namespace                  Name                        CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                        ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-jlnm6              10m (0%)      0 (0%)      0 (0%)           0 (0%)         94m
+  kube-system                coredns-678f9b8dfc-fq8l2    100m (5%)     0 (0%)      70Mi (3%)        170Mi (9%)     102m
+  kube-system                coredns-678f9b8dfc-kg8dq    100m (5%)     0 (0%)      70Mi (3%)        170Mi (9%)     102m
+  kube-system                kube-proxy-ffcvx            100m (5%)     0 (0%)      0 (0%)           0 (0%)         94m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests    Limits
+  --------                    --------    ------
+  cpu                         310m (15%)  0 (0%)
+  memory                      140Mi (7%)  340Mi (18%)
+  ephemeral-storage           0 (0%)      0 (0%)
+  attachable-volumes-aws-ebs  0           0
+Events:                       <none>
+
+
+Name:               ip-192-168-54-208.us-west-2.compute.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-07761e585443071ca
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.small
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-west-2
+                    failure-domain.beta.kubernetes.io/zone=us-west-2c
+                    kubernetes.io/hostname=ip-192-168-54-208.us-west-2.compute.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 31 Jul 2019 09:39:56 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:56 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:56 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:56 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:40:16 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.54.208
+  ExternalIP:   34.220.115.198
+  InternalDNS:  ip-192-168-54-208.us-west-2.compute.internal
+  ExternalDNS:  ec2-34-220-115-198.us-west-2.compute.amazonaws.com
+  Hostname:     ip-192-168-54-208.us-west-2.compute.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      2002400Ki
+ pods:                        11
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      1900000Ki
+ pods:                        11
+System Info:
+ Machine ID:                 ec26e37f785a31c2d4fb54280a039bb1
+ System UUID:                EC26E37F-785A-31C2-D4FB-54280A039BB1
+ Boot ID:                    08d4e903-7eb4-43a9-a120-22742127809e
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-west-2c/i-07761e585443071ca
+Non-terminated Pods:         (2 in total)
+  Namespace                  Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-d2gsl      10m (0%)      0 (0%)      0 (0%)           0 (0%)         94m
+  kube-system                kube-proxy-xng9r    100m (5%)     0 (0%)      0 (0%)           0 (0%)         94m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests   Limits
+  --------                    --------   ------
+  cpu                         110m (5%)  0 (0%)
+  memory                      0 (0%)     0 (0%)
+  ephemeral-storage           0 (0%)     0 (0%)
+  attachable-volumes-aws-ebs  0          0
+Events:                       <none>
+
+
+Name:               ip-192-168-58-50.us-west-2.compute.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-0fea6b993a435f5e2
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.small
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-west-2
+                    failure-domain.beta.kubernetes.io/zone=us-west-2c
+                    kubernetes.io/hostname=ip-192-168-58-50.us-west-2.compute.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 31 Jul 2019 09:39:58 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:58 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:58 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:39:58 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Wed, 31 Jul 2019 11:14:35 +0000   Wed, 31 Jul 2019 09:40:18 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.58.50
+  ExternalIP:   34.211.86.35
+  InternalDNS:  ip-192-168-58-50.us-west-2.compute.internal
+  ExternalDNS:  ec2-34-211-86-35.us-west-2.compute.amazonaws.com
+  Hostname:     ip-192-168-58-50.us-west-2.compute.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      2002400Ki
+ pods:                        11
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      1900000Ki
+ pods:                        11
+System Info:
+ Machine ID:                 ec2546f47edbe70e64937aa556f5588c
+ System UUID:                EC2546F4-7EDB-E70E-6493-7AA556F5588C
+ Boot ID:                    a54d4b60-eef1-4ebf-86f6-4e244c617dfc
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-west-2c/i-0fea6b993a435f5e2
+Non-terminated Pods:         (2 in total)
+  Namespace                  Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-rs7hl      10m (0%)      0 (0%)      0 (0%)           0 (0%)         94m
+  kube-system                kube-proxy-r4vrl    100m (5%)     0 (0%)      0 (0%)           0 (0%)         94m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests   Limits
+  --------                    --------   ------
+  cpu                         110m (5%)  0 (0%)
+  memory                      0 (0%)     0 (0%)
+  ephemeral-storage           0 (0%)     0 (0%)
+  attachable-volumes-aws-ebs  0          0
+Events:                       <none>
+AP-ROLE-NAME6:~/environment $ kubectl describe node ip-192-168-0-101.us-west-2.compute.internal
+Name:               ip-192-168-0-101.us-west-2.compute.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-0e5e35089ba27e535
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.small
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-west-2
+                    failure-domain.beta.kubernetes.io/zone=us-west-2b
+                    kubernetes.io/hostname=ip-192-168-0-101.us-west-2.compute.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 31 Jul 2019 09:39:55 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Wed, 31 Jul 2019 11:15:45 +0000   Wed, 31 Jul 2019 09:39:55 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Wed, 31 Jul 2019 11:15:45 +0000   Wed, 31 Jul 2019 09:39:55 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Wed, 31 Jul 2019 11:15:45 +0000   Wed, 31 Jul 2019 09:39:55 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Wed, 31 Jul 2019 11:15:45 +0000   Wed, 31 Jul 2019 09:40:15 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.0.101
+  ExternalIP:   34.210.108.18
+  InternalDNS:  ip-192-168-0-101.us-west-2.compute.internal
+  ExternalDNS:  ec2-34-210-108-18.us-west-2.compute.amazonaws.com
+  Hostname:     ip-192-168-0-101.us-west-2.compute.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      2002400Ki
+ pods:                        11
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      1900000Ki
+ pods:                        11
+System Info:
+ Machine ID:                 ec29de9536aaad01445d9a022a566f28
+ System UUID:                EC29DE95-36AA-AD01-445D-9A022A566F28
+ Boot ID:                    b95b0a52-eaf0-4ee6-955d-97e3aa7a9a4f
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-west-2b/i-0e5e35089ba27e535
+Non-terminated Pods:         (4 in total)
+  Namespace                  Name                        CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                        ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-jlnm6              10m (0%)      0 (0%)      0 (0%)           0 (0%)         95m
+  kube-system                coredns-678f9b8dfc-fq8l2    100m (5%)     0 (0%)      70Mi (3%)        170Mi (9%)     103m
+  kube-system                coredns-678f9b8dfc-kg8dq    100m (5%)     0 (0%)      70Mi (3%)        170Mi (9%)     103m
+  kube-system                kube-proxy-ffcvx            100m (5%)     0 (0%)      0 (0%)           0 (0%)         95m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests    Limits
+  --------                    --------    ------
+  cpu                         310m (15%)  0 (0%)
+  memory                      140Mi (7%)  340Mi (18%)
+  ephemeral-storage           0 (0%)      0 (0%)
+  attachable-volumes-aws-ebs  0           0
+Events:                       <none>
+AP-ROLE-NAME6:~/environment $ kubectl get namespaces
+NAME          STATUS   AGE
+default       Active   104m
+kube-public   Active   104m
+kube-system   Active   104m
+AP-ROLE-NAME6:~/environment $ kubectl get pods --namespace=kube-system
+NAME                       READY   STATUS    RESTARTS   AGE
+aws-node-d2gsl             1/1     Running   0          97m
+aws-node-jlnm6             1/1     Running   0          97m
+aws-node-rs7hl             1/1     Running   0          97m
+coredns-678f9b8dfc-fq8l2   1/1     Running   0          105m
+coredns-678f9b8dfc-kg8dq   1/1     Running   0          105m
+kube-proxy-ffcvx           1/1     Running   0          97m
+kube-proxy-r4vrl           1/1     Running   0          97m
+kube-proxy-xng9r           1/1     Running   0          97m
+AP-ROLE-NAME6:~/environment $ kubectl get pods --namespace=kube-public
+No resources found.
+AP-ROLE-NAME6:~/environment $ kubectl get svc --namespace=kube-public
+No resources found.
+AP-ROLE-NAME6:~/environment $ kubectl get svc --namespace=kube-public
+No resources found.
+AP-ROLE-NAME6:~/environment $ kubectl create namespace test
+namespace/test created
+AP-ROLE-NAME6:~/environment $ kubectl get namespace
+NAME          STATUS   AGE
+default       Active   108m
+kube-public   Active   108m
+kube-system   Active   108m
+test          Active   18s
+AP-ROLE-NAME6:~/environment $ kubectl describe test
+error: the server doesn't have a resource type "test"
+AP-ROLE-NAME6:~/environment $ kubectl describe namespace test
+Name:         test
+Labels:       <none>
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No resource limits.
+AP-ROLE-NAME6:~/environment $ kubectl config set-context $(kubectl config current-context) --namespace=test
+Context "i-027d3866e61eb09c2@prod.us-west-2.eksctl.io" modified.
+AP-ROLE-NAME6:~/environment $ kubectl config view | grep namespace:test
+AP-ROLE-NAME6:~/environment $ kubectl config view | grep namespace: test
+grep: test: No such file or directory
+AP-ROLE-NAME6:~/environment $ kubectl config view | grep namespace: test
+grep: test: No such file or directory
+AP-ROLE-NAME6:~/environment $ kubectl config view | grep namespace test
+grep: test: No such file or directory
+AP-ROLE-NAME6:~/environment $ kubectl config view | grep namespace
+    namespace: test
+AP-ROLE-NAME6:~/environment $ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://1ACBAAC34B192448FCDCE05EDE9B0287.sk1.us-west-2.eks.amazonaws.com
+  name: prod.us-west-2.eksctl.io
+contexts:
+- context:
+    cluster: prod.us-west-2.eksctl.io
+    namespace: test
+    user: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+  name: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+current-context: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+kind: Config
+preferences: {}
+users:
+- name: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1alpha1
+      args:
+      - token
+      - -i
+      - prod
+      command: aws-iam-authenticator
+      env: null
+AP-ROLE-NAME6:~/environment $ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://1ACBAAC34B192448FCDCE05EDE9B0287.sk1.us-west-2.eks.amazonaws.com
+  name: prod.us-west-2.eksctl.io
+contexts:
+- context:
+    cluster: prod.us-west-2.eksctl.io
+    namespace: test
+    user: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+  name: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+current-context: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+kind: Config
+preferences: {}
+users:
+- name: i-027d3866e61eb09c2@prod.us-west-2.eksctl.io
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1alpha1
+      args:
+      - token
+      - -i
+      - prod
+      command: aws-iam-authenticator
+      env: null
+AP-ROLE-NAME6:~/environment $ kubectl config view | grep namespace
+    namespace: test
+AP-ROLE-NAME6:~/environment $ kubectl apply -f testapp/deploy.yml
+deployment.apps/apache-deployment created
+service/testfrontend created
+AP-ROLE-NAME6:~/environment $ kubectl get deployment
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+apache-deployment   2/2     2            2           19s
+AP-ROLE-NAME6:~/environment $ kubectl describe deployment apache-deployment
+Name:                   apache-deployment
+Namespace:              test
+CreationTimestamp:      Wed, 31 Jul 2019 11:46:11 +0000
+Labels:                 app=apache
+Annotations:            deployment.kubernetes.io/revision: 1
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {"apiVersion":"apps/v1beta1","kind":"Deployment","metadata":{"annotations":{},"name":"apache-deployment","namespace":"test"},"spec":{"repl...
+Selector:               app=apache
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=apache
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:1.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     1
+      memory:  500Mi
+    Requests:
+      cpu:        500m
+      memory:     200Mi
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   apache-deployment-b8bf884b (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  58s   deployment-controller  Scaled up replica set apache-deployment-b8bf884b to 2
+AP-ROLE-NAME6:~/environment $ kubectl describe rs apache-deployment-b8bf884b
+Name:           apache-deployment-b8bf884b
+Namespace:      test
+Selector:       app=apache,pod-template-hash=b8bf884b
+Labels:         app=apache
+                pod-template-hash=b8bf884b
+Annotations:    deployment.kubernetes.io/desired-replicas: 2
+                deployment.kubernetes.io/max-replicas: 3
+                deployment.kubernetes.io/revision: 1
+Controlled By:  Deployment/apache-deployment
+Replicas:       2 current / 2 desired
+Pods Status:    2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=apache
+           pod-template-hash=b8bf884b
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:1.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     1
+      memory:  500Mi
+    Requests:
+      cpu:        500m
+      memory:     200Mi
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                   Message
+  ----    ------            ----  ----                   -------
+  Normal  SuccessfulCreate  3m2s  replicaset-controller  Created pod: apache-deployment-b8bf884b-nthzv
+  Normal  SuccessfulCreate  3m2s  replicaset-controller  Created pod: apache-deployment-b8bf884b-r7kf4
+AP-ROLE-NAME6:~/environment $ kubectl events
+Error: unknown command "events" for "kubectl"
+Run 'kubectl --help' for usage.
+unknown command "events" for "kubectl"
+AP-ROLE-NAME6:~/environment $ kubectl get service
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                                                              PORT(S)        AGE
+testfrontend   LoadBalancer   10.100.28.186   acb242de1b38811e98503063468aa4db-390632762.us-west-2.elb.amazonaws.com   80:32293/TCP   10m
+AP-ROLE-NAME6:~/environment $ eksctl delete cluster --region us-west-2 --name prod
+[ℹ]  using region us-west-2
+[ℹ]  deleting EKS cluster "prod"
+[✔]  kubeconfig has been updated
+[ℹ]  cleaning up LoadBalancer services
+[ℹ]  2 sequential tasks: { delete nodegroup "standard-workers", delete cluster control plane "prod" [async] }
+[ℹ]  will delete stack "eksctl-prod-nodegroup-standard-workers"
+[ℹ]  waiting for stack "eksctl-prod-nodegroup-standard-workers" to get deleted
+
+
+[ℹ]  will delete stack "eksctl-prod-cluster"
+[✔]  all cluster resources were deleted
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ 
+
+
+
