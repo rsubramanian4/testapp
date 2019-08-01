@@ -1,5 +1,27 @@
+
+eksctl create cluster \
+--region us-east-1 \
+--name prod \
+--version 1.13 \
+--nodegroup-name standard-workers \
+--node-type t3.medium \
+--zones=us-east-1a,us-east-1b,us-east-1c \
+--nodes 4 \
+--nodes-min 4 \
+--nodes-max 4 \
+--node-ami auto
+
+ eksctl delete cluster --region us-east-1 --name prod 
+ 
  kubectl delete namespace test
+ 
+ kubectl create namespace test
+ 
  kubectl config set-context $(kubectl config current-context) --namespace=test
+ 
+  kubectl apply -f testapp/deploy.yml
+ 
+ 
 
 http://labsap.s3-website-us-west-1.amazonaws.com/
 Student5	960252834999
