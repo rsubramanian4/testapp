@@ -1,0 +1,528 @@
+ 1  pwd
+    2  ls
+    3  sudo yum -y install docker
+    4  docker info
+    5  whoami
+    6  sudo usermod -a -G docker ec2-user
+    7  id -a
+    8  sudo service docker start
+    9  sudo chkconfig docker on
+   10  history
+   11  sudo service docker status
+   12  docker info
+   13  ll
+   14  docker pull http:2.4
+   15  docker pull httpd:2.4
+   16  docker images
+   17  docker inspect httpd
+   18  docker inspect httpd:2.4
+   19  history
+   20  docker run -d --name testapache httpd2.4
+   21  docker run -d --name testapache httpd:2.4
+   22  docker ps -a
+   23  docker stop testapache
+   24  docker p
+   25  docker ps
+   26  docker ps -a
+   27  git clone https://github.com/rsubramanian4/testapp.git
+   28  docker build -t knowdocker/myapache:1.0 testapp/frontend/
+   29  docker images
+   30  docker inspect e32ae41a4574
+   31  history
+   32  docker ps
+   33  docke images
+   34  dockr images
+   35  docker images
+   36  docker run -d --name myapache knowdocker/myapache:1.0
+   37  docker ps
+   38  docker logs myapache
+   39  docker stop myapache
+   40  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   41  docker run -d --name myapache9 -p 9000:80  knowdocker/myapache:1.0
+   42  curl http://localhost
+   43  curl http://localhost:9000
+   44  history
+   45  curl http://localhost:9000
+   46  docker conatiner -rm myapache
+   47  docker stop myapache
+   48  docker rm myapache
+   49  docker stop myapache9
+   50  docker rm myapache9
+   51  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   52  curl http://localhost:9000
+   53  docker push knowdocker/myapache:1.0
+   54  ll
+   55  git commit 
+   56  git commit https://github.com/rsubramanian4/testapp.git
+   57  cd testapp/
+   58  git commit https://github.com/rsubramanian4/testapp.git
+   59  ll
+   60  cd ..
+   61  ll
+   62  docker login
+   63  docker login -u "knowdocker" -p "Dock$2474"
+   64  docker login -u knowdocker -p Dock$2474
+   65  docker login -uknowdocker -pDock$2474
+   66  docker login -u knowdocker -p Dock$2474
+   67  https://github.com/rsubramanian4/testapp.git
+   68  LL
+   69  ll
+   70  cd testapp/
+   71  ll
+   72  git commit
+   73  git push
+   74  git stage
+   75  exit
+   76  pwd
+   77  ll
+   78  exit
+   79  docker ps
+   80  docker ps -
+   81  docker ps -a
+   82  docker run -d --name myapache -p 9000:80  knowdocker/myapache:1.0
+   83  docker start myapache
+   84  docker ps
+   85  docket login
+   86  docker login
+   87  docker push myapache:1.0
+   88  docker push knowdocker/myapache:1.0
+   89  cd testapp/
+   90  ll
+   91  git add *
+   92  git commit -m "first commit"
+   93  git config --global
+   94  git config
+   95  git config --global
+   96  git config
+   97  git config --global --list
+   98  git init
+   99  vi .git
+  100  git commit -m "first commit"
+  101  git push
+  102  history
+  103  git commit -m "test commmit"
+  104  git add *
+  105  git commit -m "test commmit"
+  106  git push
+  107  git config --global user.name "rsubramanian4"
+  108  git config --global user.email mailtoraja.s@gmail.com
+  109  git config --list
+  110  git add
+  111  git add *
+  112  git commit -m "second commmit"
+  113  git push
+  114  history
+  115  git add *
+  116  git commit -m "day1 commands commmit"
+  117  git push
+  118  exit
+  119  pwd
+  120  cd testapp/
+  121  git add
+  122  git add *
+  123  git commit "lab commit"
+  124  git commit -m "lab commit"
+  125  git push
+  126  cd ..
+  127  docker images
+  128  docker lgin
+  129  docker login
+  130  vi /home/ec2-user/.docker/config.json
+  131  docker build -t knowdocker/myapache:2.0 testapp/frontend/
+  132  docker imges
+  133  docker images
+  134  docker push knowdocker/myapache:2.0
+  135  cd testapp/
+  136  git add *
+  137  git commit -m "added first day notes"
+  138  git push
+  139  cd ..
+  140  docker build -t knowdocker/nginx-php:1.0 testapp/excercise/
+  141  docker run -dit ubuntu:18.04
+  142  docker ps
+  143  docker exec -it hopeful_blackwell /bin/bash
+  144  docker run -dit ubuntu:18.04
+  145  docker exec -it hopeful_blackwell /bin/bash
+  146  docker build -t knowdocker/nginx-php:1.0 testapp/excercise/
+  147  d
+  148  docker images
+  149  docker run -d --name nginx-apache -p 9001:80  knowdocker/nginx-php:1.0
+  150  docker ps
+  151  curl http://localhost:9001
+  152  docker history knowdocker/nginx-php:1.0
+  153  docker images
+  154  docker rm 4188dd4b99bb
+  155  docker image rmi 4188dd4b99bb
+  156  docker image rmi -f 55607ad4ccca
+  157  docker image rmi -f 4188dd4b99bb
+  158  docker images
+  159  docker rmi -f $(docker images -f "dangling=true" -q)
+  160  docker images
+  161  d
+  162  cd testapp/
+  163  git add *
+  164  git commit -m "second docker file"
+  165  git push
+  166  cd 
+  167  pwd
+  168  exit
+  169  docker login
+  170  docker images
+  171  docker push knowdocker/nginx-php:1.0
+  172  curl http://localhost9001
+  173  curl http://localhost:9001
+  174  docker ps -a
+  175  docker ps
+  176  docker rm nginx-apache inspiring_shannon hopeful_blackwell
+  177  docker stop nginx-apache inspiring_shannon hopeful_blackwell
+  178  docker rm nginx-apache inspiring_shannon hopeful_blackwell
+  179  docker images
+  180  docker ps
+  181  docker ps -a
+  182  docker ps
+  183  docker images
+  184  docker run -d -p 9000:80 --name testapache -v testapache_var_log:/var/log -v /home/ec2-user:/home/ec2-user knowdocker/myapache:1.0
+  185  docker run -d -p 9000:80 --name testapachevolume -v testapache_var_log:/var/log -v /home/ec2-user:/home/ec2-user knowdocker/myapache:1.0
+  186  docker volumes
+  187  docker volume
+  188  docker images
+  189  docker ps
+  190  docker exec testapchevolme /bin/bash
+  191  docker exec testapachevolme /bin/bash
+  192  cd /home/
+  193  ls
+  194  cd ec2-user/
+  195  ll
+  196  ls
+  197  docker volumes
+  198  docker volume
+  199  docker volume ls
+  200  docker exec -it testapachevolume /bin/bash
+  201  git clone https://githu.commohanraz81/awslogs.git
+  202  git clone https://github.com/mohanraz81/awslogs.git
+  203  ls
+  204  mv ~/.aws ~/.aws_backup
+  205  docker build -t mohanraz81/awslogs:1.0 /awslogs
+  206  docker build -t mohanraz81/awslogs:1.0 awslogs/
+  207  docker run -d --name logagent -v testapache_var_log
+  208  docker run -d --name logagent -v testapache_var_log  mohanraz81/awslogs:1.0
+  209  docker rm logagent
+  210  docker stop logagent
+  211  docker run -d --name logagent -v testapache_var_log:/mnt/log:ro  mohanraz81/awslogs:1.0 
+  212  docker rm logagent
+  213  docker run -d --name logagent -v testapache_var_log:/mnt/log:ro  mohanraz81/awslogs:1.0 
+  214  docker exec -it logagent bash/bin
+  215  curl http://localost:9000
+  216  curl http://localhost:9000
+  217  docker network ls
+  218  docker network ps
+  219  docker ps -a
+  220  docker ps
+  221  docker exec -it logagent /bin/sh
+  222  docker stop logagent testapachevolume
+  223  docker rm logagent testapachevolume
+  224  docker ps
+  225  docker ps -a
+  226  docker network ls
+  227  ifconfg -a|more
+  228  ifconfig -a|more
+  229  docker inspect bridge
+  230  docker network create --drive=bridge --subnet 10.1.0.0/16 --gateway 10.1.0.1 testnw
+  231  docker network create --driver=bridge --subnet 10.1.0.0/16 --gateway 10.1.0.1 testnw
+  232  docker network ls
+  233  docker history
+  234  docker images
+  235  docker run -d -p 9000:80 --name frontend --net testnw knowdocker/myapache:2.0
+  236  docker run -d -p  --name backend --net testnw knowdocker/myapache:2.0
+  237  docker run -d  --name backend --net testnw knowdocker/myapache:2.0
+  238  docker ps
+  239  docker inspect testnw
+  240  curl http://frontend
+  241  docker exec -it  frontend bash/bin
+  242  docker exec -it  frontend bash\bin
+  243  docker exec -it  frontend "bash\bin"
+  244  docker exec -it  frontend "bin bash"
+  245  docker exec -it  frontend bin bash
+  246  docker stop frontend backend
+  247  docker rm testnw
+  248  docker --net rm testnw
+  249  docker network rm testnw
+  250  docker run -d -p  --name backend  knowdocker/myapache:2.0
+  251  docker run -d  --name backend  knowdocker/myapache:2.0
+  252  docker rm frontend backend
+  253  docker run -d  --name backend  knowdocker/myapache:2.0
+  254  docker run -d -p 9000:80 --name frontend --net testnw knowdocker/myapache:2.0
+  255  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0
+  256  docker rm fronend
+  257  docker rm frontend
+  258  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend
+  259  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend knowdocker/myapache
+  260  docker ps
+  261  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend knowdocker/myapache:2.0
+  262  docker ps
+  263  docker rm frontend
+  264  docker run -d -p 9000:80 --name frontend  knowdocker/myapache:2.0 --link backend knowdocker/myapache:2.0
+  265  docker run -d -p 9000:80 --name frontend  --link backend knowdocker/myapache:2.0
+  266  docker rm frontend
+  267  docker run -d -p 9000:80 --name frontend  --link backend knowdocker/myapache:2.0
+  268  curl http://frontend
+  269  curl http://frontend:9000
+  270  docker -it exec frontend /bin/bash
+  271  docker exec -it  frontend /bin/bash
+  272  cd testapp
+  273  ls
+  274  cd testapp/
+  275  git add *
+  276  git commit -m "after network"
+  277  git push
+  278  cd ..
+  279  history
+  280  sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  281  sudo chmod +x /usr/local/bin/docker-compose
+  282  docker-compose
+  283  docker images
+  284  docker ps
+  285  cd testapp/
+  286  docker-compose build
+  287  docker images
+  288  docker-compose build
+  289  docker images
+  290  docker ps
+  291  docker stop frontend backend
+  292  docker rm frontend backend
+  293  docker-compose up -d 
+  294  docker ps
+  295  docker-compose down
+  296  git add *
+  297  git commit -m "docker-compose"
+  298  git push
+  299  docker-compose down
+  300  docker ps
+  301  docker ps -a
+  302  history
+  303  docker-compose push
+  304  history
+  305  h
+  306  cd testapp/
+  307  git add *
+  308  git commit -m "end of 2nd day commit"
+  309  git push
+  310  exit
+  311  mv ~/.aws ~/.aws_backup
+  312  pip install awscli --upgrade --user
+  313  curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator
+  314  chmod +x ./aws-iam-authenticator
+  315  mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
+  316  echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+  317  aws-iam-authenticator help
+  318  curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+  319  sudo mv /tmp/eksctl /usr/local/bin
+  320  eksctl version
+  321  eksctl create cluster --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto
+  322  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  323  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  324  chmod +x ./kubectl
+  325  sudo mv ./kubectl /usr/local/bin/kubectl
+  326  kubectl version
+  327  kubectl get nodes
+  328  kubectl get prod
+  329  kubectl get clusters
+  330  kubectl get nodes
+  331  kubectl get cluster
+  332  kubectl get pods
+  333  kubectl get nods
+  334  kubectl get nodes
+  335  kubectl cat ~/.kube/config
+  336   cat ~/.kube/config
+  337  kubectl pods
+  338  kubectl get pods
+  339  kubectl describe cluster prod
+  340  kubectl describe node 
+  341  kubectl describe node ip-192-168-0-101.us-west-2.compute.internal
+  342  kubectl get namespaces
+  343  kubectl get pods --namespace=kube-system
+  344  kubectl get pods --namespace=kube-public
+  345  kubectl get svc --namespace=kube-public
+  346  kubectl create namespace test
+  347  kubectl get namespace
+  348  kubectl describe test
+  349  kubectl describe namespace test
+  350  kubectl config set-context $(kubectl config current-context) --namespace=test
+  351  kubectl config view | grep namespace:test
+  352  kubectl config view | grep namespace: test
+  353  kubectl config view | grep namespace test
+  354  kubectl config view | grep namespace
+  355  kubectl config view
+  356  kubectl config view | grep namespace
+  357  kubectl apply -f testapp/deploy.yml
+  358  kubectl get deployment
+  359  kubectl describe deployment apache-deployment
+  360  kubectl describe rs apache-deployment-b8bf884b
+  361  kubectl events
+  362  kubectl get service
+  363  history
+  364  eksctl delete cluster --region us-west-2 --name prod
+  365  cd testapp/
+  366  git add *
+  367  git commit -m "day 3 end"
+  368  git push
+  369   mv ~/.aws ~/.aws_backup1
+  370   eksctl version
+  371  eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto
+  372  --region us-east-1a --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami aut
+  373  eksctl create cluster --region us-east-1a --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto
+  374  vi home/ec2-user/.kube/config
+  375  vi /home/ec2-user/.kube/config
+  376  eksctl create cluster --region us-east-2 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto
+  377  kubectl get pods
+  378  kubectl get nods
+  379  kubectl get nodes
+  380  kubectl get namespaces
+  381  kubectl create namespace test
+  382  kubectl get namespaces
+  383  kubectl describe namespace test
+  384  kubectl config set-context $(kubectl config current-context) --namespace=test
+  385   kubectl apply -f testapp/deploy.yml
+  386  get deployment
+  387  kubectl get deployment
+  388  describe deployment apache-deployment
+  389  kubectl describe deployment apache-deployment
+  390  kubectl describe rs apache-deployment-b8bf884b
+  391  kubectl events
+  392  kubectl get service
+  393  eksctl delete cluster --region us-east-2 --name prod
+  394   mv ~/.aws ~/.aws_backup4
+  395   mv ~/.aws ~/.aws_backup
+  396   mv ~/.aws ~/.aws_backup1
+  397  eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.medium --zones=us-east-1a,us-east-1b,us-east-1c --nodes 4 --nodes-min 4 --nodes-max 4 --node-ami auto
+  398  eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.medium --zones=us-east-1a,us-east-1b,us-east-1c --nodes 4 --nodes-min 4 --nodes-max 4 --node-ami auto
+  399  eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.medium --zones=us-east-1a,us-east-1b,us-east-1c --nodes 4 --nodes-min 4 --nodes-max 4 --node-ami auto
+  400  kubectl  get namespaces
+  401   kubectl pods
+  402   kubectl get pods
+  403   kubectl get nodes
+  404  kubectl describe cluster prod
+  405  kubectl describe node
+  406  kubectl  get namespaces
+  407  kubectl get nodes
+  408  kubectl apply -f testapp/deploy.yml
+  409  kubectl describe deployment apache-deployment
+  410  kubectl describe srv testfrontend
+  411  kubectl describe src testfrontend
+  412  kubectl describe service testfrontend
+  413  kubectl get pods
+  414  kubectl describe pod apache-deployment-954897f69-bqnpb
+  415  kubectl describe pod apache-deployment-954897f69-jcftb
+  416  kubectl get hpa
+  417  kubectl get hps
+  418  kubectl get hpa
+  419  curl -LO https://git.io/get_helm.sh
+  420  chmod 700 get_helm.sh
+  421  ./get_hemm.sh
+  422  ./get_helm.sh
+  423  kubectl create namespace tiller
+  424  export TILLER_NAMESPACE = tiller
+  425  export TILLER_NAMESPACE=tiller
+  426  k
+  427  export HELM_HOST=:44134
+  428  helm init --client-only
+  429  sudo yum -y install jq
+  430  DOWNLOAD_URL=$(curl --silent "https://api.github.com/repos/kubernetes-incubator/metrics-server/releases/latest" | jq -r .tarball_url)
+  431  DOWNLOAD_VERSION=$(grep -o '[^/v]*$' <<< $DOWNLOAD_URL)
+  432  curl -Ls $DOWNLOAD_URL -o metrics-server-$DOWNLOAD_VERSION.tar.gz
+  433  mkdir metrics-server-$DOWNLOAD_VERSION
+  434  tar -xzf metrics-server-$DOWNLOAD_VERSION.tar.gz --directory metrics-server-$DOWNLOAD_VERSION --strip-components 1
+  435  kubectl apply -f metrics-server-$DOWNLOAD_VERSION/deploy/1.8+
+  436  kubectl get deployment metrics-server -n kube-system
+  437  kubectl get --raw /metrics
+  438  kubectl create namespace prometheus
+  439  helm install stable/prometheus --name prometheus --namespace prometheus --set alertmanager.persistentVolume.storageClass="gp2",server.persistentVolume.storageClass="gp2"
+  440  kubectl get pods -n prometheus
+  441  kubectl get hpa
+  442  kubectl get service
+  443  kubectl get hpa
+  444  kubectl get service
+  445  kubectl get pods
+  446  kubectl get deployment apache-deployment
+  447  kubectl describe deployment apache-deployment
+  448  kubectl get service
+  449  kubectl describe service testfrontend
+  450  kubectl get hpa
+  451  kubectl get service
+  452  kubectl describe service testfrontend
+  453  kubectl delete all --all
+  454  kubectl create namespace test
+  455  kubectl config set-context $(kubectl config current-context) --namespace=test
+  456   kubectl apply -f testapp/deploy.yml
+  457  kubectl get pods
+  458  kubectl get services
+  459  docker build -t knowdocker/myfrontend:2.0 testapp/frontend/
+  460  docker push knowdocker/myfrontend:2.0
+  461  kubectl apply -f testapp/deploy.yml
+  462  docker build -t knowdocker/myfrontend:3.0 testapp/frontend/
+  463  docker push knowdocker/myfrontend:3.0
+  464  kubectl rollout history deployment.v1beta1.apps/nginx-deployment --revision=2
+  465  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
+  466  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=1
+  467  kubectl rollout undo deployment.v1beta1.apps/apache-deployment
+  468  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
+  469  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=3
+  470  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
+  471  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=1
+  472  kubectl rollout undo deployment.v1beta1.apps/apache-deployment --to-revision=1
+  473  kubectl rollout history deployment.v1beta1.apps/apache-deployment
+  474  kubectl rollout history deployment.v1beta1.apps/nginx-deployment
+  475  kubectl rollout history deployment.v1beta1.apps/apache-deployment deployments "apache-deployment"
+  476  kubectl rollout history deployment.v1beta1.apps/apache-deployment
+  477  kubectl delete all --all
+  478  kubectl apply -f testapp/two-tier/deploy.yml
+  479  kubectl service hello
+  480  kubectl deployment hello
+  481  kubectl get service
+  482  kubectl create namespace newtest
+  483  kubectl apply -f testapp/two-tier/deploy.yml --namespace=newtest
+  484  kubectl get pods
+  485  kubectl get pods --namespace=newtest
+  486  kubectl apply -f testapp/two-tier/deploy.yml --namespace=newtestone
+  487  kubectl exec -it kubectl frontend-c8665bf8b-cptf6
+  488  kubectl exec -it frontend-c8665bf8b-cptf6
+  489  kubectl exec -it frontend-c8665bf8b-cptf6 bin/bash
+  490  kubectl exec -it --namespact=newtest  frontend-c8665bf8b-cptf6 bin/bash
+  491  kubectl --namespace=newtest exec -it frontend-c8665bf8b-cptf6 /bin/bash
+  492  kubectl delete all --all --namesace=newtest
+  493  kubectl delete all --all --namespace=newtest
+  494  kubectl delete all --all --namespace=test
+  495  kucbectl get namespace
+  496  kubectl get namespace
+  497  kubectl delete all --all --namespace=test
+  498  kubectl delete all --all --namespace=newtest
+  499* 
+  500  kubectl delete namepace test
+  501  kubectl delete namespace test
+  502  kubectl delete namespace newtest
+  503  kubectl apply -f testapp/test-quota.yml
+  504  kubectl create namespace test
+  505  kubectl config set-context $(kubectl config current-context) --namespace=test
+  506  kubectl apply -f testapp/test-quota.yml
+  507  kubectl get service
+  508  kubectl describe namespace test
+  509  kubectl apply -f testapp/test-limitrange.yml
+  510  kubectl describe namespace test
+  511  kubectl delete all --all namespace test
+  512  kubectl delete all --all namespace=test
+  513  kubectl delete all --all --namespace=test
+  514  kubectl delete all --all
+  515  kubectl get namespaces
+  516* 
+  517  kubectl delete all --all
+  518  kubectl describe namespace testkubectl describe namespace test
+  519  kubectl get namespaces
+  520  kubectl delete namespace=test
+  521  kubectl delete namespace=test --all
+  522  kubectl delete namespace
+  523  kubectl delete all --all
+  524  kubectl delete namespace test
+  525  kubectl delete all --all
+  526  kubectl get pods
+  527  kubectl get service
+  528  history

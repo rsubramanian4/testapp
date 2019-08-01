@@ -1,4 +1,5 @@
-
+ kubectl delete namespace test
+ kubectl config set-context $(kubectl config current-context) --namespace=test
 
 http://labsap.s3-website-us-west-1.amazonaws.com/
 Student5	960252834999
@@ -1889,3 +1890,1382 @@ AP-ROLE-NAME6:~/environment $
 
 
 
+---------- Day 4 morning try out before the class starts
+
+eksctl create cluster \
+--region us-east-2 \
+--name prod \
+--version 1.13 \
+--nodegroup-name standard-workers \
+--node-type t3.small \
+--nodes 3 \
+--nodes-min 3 \
+--nodes-max 3 \
+--node-ami auto
+
+eksctl delete cluster --region us-east-2 --name prod
+
+--------------Day 4 starts 4 nodes in zones east 1a 1b lc
+
+eksctl create cluster \
+--region us-east-1 \
+--name prod \
+--version 1.13 \
+--nodegroup-name standard-workers \
+--node-type t3.medium \
+--zones=us-east-1a,us-east-1b,us-east-1c \
+--nodes 4 \
+--nodes-min 4 \
+--nodes-max 4 \
+--node-ami auto
+
+--------- Day 4 till after none, since terminal got hanged -----------
+
+AP-ROLE-NAME6:~/environment $  mv ~/.aws ~/.aws_backup1
+AP-ROLE-NAME6:~/environment $  eksctl version
+[ℹ]  version.Info{BuiltAt:"", GitCommit:"", GitTag:"0.2.1"}
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.small \
+> --nodes 3 \
+> --nodes-min 3 \
+> --nodes-max 3 \
+> --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  setting availability zones to [us-east-1e us-east-1b]
+[ℹ]  subnets for us-east-1e - public:192.168.0.0/19 private:192.168.64.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.96.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  deploying stack "eksctl-prod-cluster"
+[✖]  unexpected status "ROLLBACK_IN_PROGRESS" while waiting for CloudFormation stack "eksctl-prod-cluster"
+[ℹ]  fetching stack events in attempt to troubleshoot the root cause of the failure
+[✖]  AWS::EC2::SubnetRouteTableAssociation/RouteTableAssociationPrivateUSEAST1E: CREATE_FAILED – "Resource creation cancelled"
+[✖]  AWS::EC2::SubnetRouteTableAssociation/RouteTableAssociationPublicUSEAST1B: CREATE_FAILED – "Resource creation cancelled"
+[✖]  AWS::EC2::NatGateway/NATGateway: CREATE_FAILED – "Resource creation cancelled"
+[✖]  AWS::EC2::SubnetRouteTableAssociation/RouteTableAssociationPrivateUSEAST1B: CREATE_FAILED – "Resource creation cancelled"
+[✖]  AWS::EC2::SubnetRouteTableAssociation/RouteTableAssociationPublicUSEAST1E: CREATE_FAILED – "Resource creation cancelled"
+[✖]  AWS::EKS::Cluster/ControlPlane: CREATE_FAILED – "Cannot create cluster 'prod' because us-east-1e, the targeted availability zone, does not currently have sufficient capacity to support the cluster. Retry and choose from these availability zones: us-east-1a, us-east-1b, us-east-1c, us-east-1d, us-east-1f (Service: AmazonEKS; Status Code: 400; Error Code: UnsupportedAvailabilityZoneException; Request ID: 325147e7-b40e-11e9-8d46-670b72ef9516)"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=prod'
+[✖]  waiting for CloudFormation stack "eksctl-prod-cluster" to reach "CREATE_COMPLETE" status: ResourceNotReady: failed waiting for successful resource state
+[✖]  failed to create cluster "prod"
+AP-ROLE-NAME6:~/environment $ --region us-east-1a \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.small \
+> --nodes 3 \
+> --nodes-min 3 \
+> --nodes-max 3 \
+> eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami aut
+bash: --region: command not found
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1a \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.small \
+> --nodes 3 \
+> --nodes-min 3 \
+> --nodes-max 3 \
+> --node-ami auto
+[✖]  --region=us-east-1a is not supported - use one of: us-west-2, us-east-1, us-east-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-central-1, ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-south-1
+AP-ROLE-NAME6:~/environment $ eksctl create cluster --region us-east-2 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto
+[ℹ]  using region us-east-2
+[ℹ]  setting availability zones to [us-east-2c us-east-2a us-east-2b]
+[ℹ]  subnets for us-east-2c - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-2a - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-2b - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0485258c2d1c3608f" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-2" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-2 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  deploying stack "eksctl-prod-cluster"
+[ℹ]  building nodegroup stack "eksctl-prod-nodegroup-standard-workers"
+[ℹ]  deploying stack "eksctl-prod-nodegroup-standard-workers"
+[✔]  all EKS cluster resource for "prod" had been created
+[✔]  saved kubeconfig as "/home/ec2-user/.kube/config"
+[ℹ]  adding role "arn:aws:iam::960252834999:role/eksctl-prod-nodegroup-standard-wo-NodeInstanceRole-1DU877M3BGQ3N" to auth ConfigMap
+[ℹ]  nodegroup "standard-workers" has 0 node(s)
+[ℹ]  waiting for at least 3 node(s) to become ready in "standard-workers"
+[ℹ]  nodegroup "standard-workers" has 3 node(s)
+[ℹ]  node "ip-192-168-24-69.us-east-2.compute.internal" is ready
+[ℹ]  node "ip-192-168-56-28.us-east-2.compute.internal" is ready
+[ℹ]  node "ip-192-168-94-137.us-east-2.compute.internal" is ready
+[ℹ]  kubectl command should work with "/home/ec2-user/.kube/config", try 'kubectl get nodes'
+[✔]  EKS cluster "prod" in "us-east-2" region is ready
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+No resources found.
+AP-ROLE-NAME6:~/environment $ kubectl get nods
+error: the server doesn't have a resource type "nods"
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                                           STATUS   ROLES    AGE   VERSION
+ip-192-168-24-69.us-east-2.compute.internal    Ready    <none>   91s   v1.13.7-eks-c57ff8
+ip-192-168-56-28.us-east-2.compute.internal    Ready    <none>   90s   v1.13.7-eks-c57ff8
+ip-192-168-94-137.us-east-2.compute.internal   Ready    <none>   89s   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl get namespaces
+NAME          STATUS   AGE
+default       Active   9m42s
+kube-public   Active   9m42s
+kube-system   Active   9m42s
+AP-ROLE-NAME6:~/environment $ kubectl create namespace test
+namespace/test created
+AP-ROLE-NAME6:~/environment $ kubectl get namespaces
+NAME          STATUS   AGE
+default       Active   10m
+kube-public   Active   10m
+kube-system   Active   10m
+test          Active   3s
+AP-ROLE-NAME6:~/environment $ kubectl describe namespace test
+Name:         test
+Labels:       <none>
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No resource limits.
+AP-ROLE-NAME6:~/environment $ kubectl config set-context $(kubectl config current-context) --namespace=test
+Context "i-027d3866e61eb09c2@prod.us-east-2.eksctl.io" modified.
+AP-ROLE-NAME6:~/environment $  kubectl apply -f testapp/deploy.yml
+deployment.apps/apache-deployment created
+service/testfrontend created
+AP-ROLE-NAME6:~/environment $ get deployment
+bash: get: command not found
+AP-ROLE-NAME6:~/environment $ kubectl get deployment
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+apache-deployment   2/2     2            2           27s
+AP-ROLE-NAME6:~/environment $ describe deployment apache-deployment
+bash: describe: command not found
+AP-ROLE-NAME6:~/environment $ kubectl describe deployment apache-deployment                                                                                                                         
+Name:                   apache-deployment
+Namespace:              test
+CreationTimestamp:      Thu, 01 Aug 2019 04:05:45 +0000
+Labels:                 app=apache
+Annotations:            deployment.kubernetes.io/revision: 1
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {"apiVersion":"apps/v1beta1","kind":"Deployment","metadata":{"annotations":{},"name":"apache-deployment","namespace":"test"},"spec":{"repl...
+Selector:               app=apache
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=apache
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:1.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     1
+      memory:  500Mi
+    Requests:
+      cpu:        500m
+      memory:     200Mi
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   apache-deployment-b8bf884b (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  63s   deployment-controller  Scaled up replica set apache-deployment-b8bf884b to 2
+AP-ROLE-NAME6:~/environment $ kubectl describe rs apache-deployment-b8bf884b
+Name:           apache-deployment-b8bf884b
+Namespace:      test
+Selector:       app=apache,pod-template-hash=b8bf884b
+Labels:         app=apache
+                pod-template-hash=b8bf884b
+Annotations:    deployment.kubernetes.io/desired-replicas: 2
+                deployment.kubernetes.io/max-replicas: 3
+                deployment.kubernetes.io/revision: 1
+Controlled By:  Deployment/apache-deployment
+Replicas:       2 current / 2 desired
+Pods Status:    2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=apache
+           pod-template-hash=b8bf884b
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:1.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     1
+      memory:  500Mi
+    Requests:
+      cpu:        500m
+      memory:     200Mi
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                   Message
+  ----    ------            ----  ----                   -------
+  Normal  SuccessfulCreate  108s  replicaset-controller  Created pod: apache-deployment-b8bf884b-fm9fr
+  Normal  SuccessfulCreate  108s  replicaset-controller  Created pod: apache-deployment-b8bf884b-qr7gd
+AP-ROLE-NAME6:~/environment $ kubectl events
+Error: unknown command "events" for "kubectl"
+Run 'kubectl --help' for usage.
+unknown command "events" for "kubectl"
+AP-ROLE-NAME6:~/environment $ kubectl get service
+NAME           TYPE           CLUSTER-IP     EXTERNAL-IP                                                              PORT(S)        AGE
+testfrontend   LoadBalancer   10.100.75.86   aa2eced49b41111e9b10e0222a69f545-451391329.us-east-2.elb.amazonaws.com   80:31332/TCP   2m34s
+AP-ROLE-NAME6:~/environment $ eksctl delete cluster --region us-east-2 --name prod
+[ℹ]  using region us-east-2
+[ℹ]  deleting EKS cluster "prod"
+[✔]  kubeconfig has been updated
+[ℹ]  cleaning up LoadBalancer services
+[ℹ]  2 sequential tasks: { delete nodegroup "standard-workers", delete cluster control plane "prod" [async] }
+[ℹ]  will delete stack "eksctl-prod-nodegroup-standard-workers"
+[ℹ]  waiting for stack "eksctl-prod-nodegroup-standard-workers" to get deleted
+[ℹ]  will delete stack "eksctl-prod-cluster"
+[✔]  all cluster resources were deleted
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $  mv ~/.aws ~/.aws_backup4
+mv: cannot stat ‘/home/ec2-user/.aws’: No such file or directory
+AP-ROLE-NAME6:~/environment $  mv ~/.aws ~/.aws_backup
+mv: cannot stat ‘/home/ec2-user/.aws’: No such file or directory
+AP-ROLE-NAME6:~/environment $  mv ~/.aws ~/.aws_backup1
+mv: cannot stat ‘/home/ec2-user/.aws’: No such file or directory
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=prod'
+[✖]  creating CloudFormation stack "eksctl-prod-cluster": AlreadyExistsException: Stack [eksctl-prod-cluster] already exists
+        status code: 400, request id: 22a16c3c-b423-11e9-a701-41d75e3e3465
+[✖]  failed to create cluster "prod"
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=prod'
+[✖]  creating CloudFormation stack "eksctl-prod-cluster": AlreadyExistsException: Stack [eksctl-prod-cluster] already exists
+        status code: 400, request id: 37c827e6-b423-11e9-99ce-35311c11e365
+[✖]  failed to create cluster "prod"
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=prod'
+[✖]  creating CloudFormation stack "eksctl-prod-cluster": AlreadyExistsException: Stack [eksctl-prod-cluster] already exists
+        status code: 400, request id: 5f5b889d-b423-11e9-9c8d-230bc62e7227
+[✖]  failed to create cluster "prod"
+AP-ROLE-NAME6:~/environment $ eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.medium --zones=us-east-1a,us-east-1b,us-east-1c --nodes 4 --nodes-min 4 --nodes-max 4 --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  deploying stack "eksctl-prod-cluster"
+[ℹ]  building nodegroup stack "eksctl-prod-nodegroup-standard-workers"
+[ℹ]  deploying stack "eksctl-prod-nodegroup-standard-workers"
+[✔]  all EKS cluster resource for "prod" had been created
+[✔]  saved kubeconfig as "/home/ec2-user/.kube/config"
+[ℹ]  adding role "arn:aws:iam::960252834999:role/eksctl-prod-nodegroup-standard-wo-NodeInstanceRole-9C9A7RH5T5U8" to auth ConfigMap
+[ℹ]  nodegroup "standard-workers" has 0 node(s)
+[ℹ]  waiting for at least 4 node(s) to become ready in "standard-workers"
+[ℹ]  nodegroup "standard-workers" has 4 node(s)
+[ℹ]  node "ip-192-168-17-243.ec2.internal" is ready
+[ℹ]  node "ip-192-168-41-165.ec2.internal" is ready
+[ℹ]  node "ip-192-168-70-158.ec2.internal" is ready
+[ℹ]  node "ip-192-168-81-6.ec2.internal" is ready
+[ℹ]  kubectl command should work with "/home/ec2-user/.kube/config", try 'kubectl get nodes'
+[✔]  EKS cluster "prod" in "us-east-1" region is ready
+AP-ROLE-NAME6:~/environment $ kubectl  get namespaces
+NAME          STATUS   AGE
+default       Active   9m27s
+kube-public   Active   9m27s
+kube-system   Active   9m27s
+AP-ROLE-NAME6:~/environment $  kubectl pods
+Error: unknown command "pods" for "kubectl"
+
+Did you mean this?
+        logs
+
+Run 'kubectl --help' for usage.
+unknown command "pods" for "kubectl"
+
+Did you mean this?
+        logs
+
+AP-ROLE-NAME6:~/environment $  kubectl get pods
+No resources found.
+AP-ROLE-NAME6:~/environment $  kubectl get nodes
+NAME                             STATUS   ROLES    AGE     VERSION
+ip-192-168-17-243.ec2.internal   Ready    <none>   4m52s   v1.13.7-eks-c57ff8
+ip-192-168-41-165.ec2.internal   Ready    <none>   4m53s   v1.13.7-eks-c57ff8
+ip-192-168-70-158.ec2.internal   Ready    <none>   4m51s   v1.13.7-eks-c57ff8
+ip-192-168-81-6.ec2.internal     Ready    <none>   4m53s   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ kubectl describe cluster prod
+error: the server doesn't have a resource type "cluster"
+AP-ROLE-NAME6:~/environment $ kubectl describe node
+Name:               ip-192-168-17-243.ec2.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-05b6ab1d23614ba26
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.medium
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-east-1
+                    failure-domain.beta.kubernetes.io/zone=us-east-1a
+                    kubernetes.io/hostname=ip-192-168-17-243.ec2.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 01 Aug 2019 06:27:27 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Thu, 01 Aug 2019 06:33:57 +0000   Thu, 01 Aug 2019 06:27:27 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Thu, 01 Aug 2019 06:33:57 +0000   Thu, 01 Aug 2019 06:27:27 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Thu, 01 Aug 2019 06:33:57 +0000   Thu, 01 Aug 2019 06:27:27 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Thu, 01 Aug 2019 06:33:57 +0000   Thu, 01 Aug 2019 06:27:47 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.17.243
+  ExternalIP:   54.210.210.41
+  InternalDNS:  ip-192-168-17-243.ec2.internal
+  ExternalDNS:  ec2-54-210-210-41.compute-1.amazonaws.com
+  Hostname:     ip-192-168-17-243.ec2.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3978296Ki
+ pods:                        17
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3875896Ki
+ pods:                        17
+System Info:
+ Machine ID:                 ec2d96df4d42dfc69796f7438a4244c7
+ System UUID:                EC2D96DF-4D42-DFC6-9796-F7438A4244C7
+ Boot ID:                    70b8e268-3fa8-4a01-9664-dfb43b31efa8
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-east-1a/i-05b6ab1d23614ba26
+Non-terminated Pods:         (2 in total)
+  Namespace                  Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-xg4kd      10m (0%)      0 (0%)      0 (0%)           0 (0%)         6m40s
+  kube-system                kube-proxy-8j9z2    100m (5%)     0 (0%)      0 (0%)           0 (0%)         6m40s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests   Limits
+  --------                    --------   ------
+  cpu                         110m (5%)  0 (0%)
+  memory                      0 (0%)     0 (0%)
+  ephemeral-storage           0 (0%)     0 (0%)
+  attachable-volumes-aws-ebs  0          0
+Events:
+  Type    Reason    Age    From                                        Message
+  ----    ------    ----   ----                                        -------
+  Normal  Starting  6m32s  kube-proxy, ip-192-168-17-243.ec2.internal  Starting kube-proxy.
+
+
+Name:               ip-192-168-41-165.ec2.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-0b8c1672603c6f9b1
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.medium
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-east-1
+                    failure-domain.beta.kubernetes.io/zone=us-east-1b
+                    kubernetes.io/hostname=ip-192-168-41-165.ec2.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 01 Aug 2019 06:27:26 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:26 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:26 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:26 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:46 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.41.165
+  ExternalIP:   35.170.58.235
+  InternalDNS:  ip-192-168-41-165.ec2.internal
+  ExternalDNS:  ec2-35-170-58-235.compute-1.amazonaws.com
+  Hostname:     ip-192-168-41-165.ec2.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3978296Ki
+ pods:                        17
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3875896Ki
+ pods:                        17
+System Info:
+ Machine ID:                 ec2097ca991a2b6dba65ab9f2fb0ed59
+ System UUID:                EC2097CA-991A-2B6D-BA65-AB9F2FB0ED59
+ Boot ID:                    ce8e9a6e-241f-4710-a163-6382ea603b02
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-east-1b/i-0b8c1672603c6f9b1
+Non-terminated Pods:         (2 in total)
+  Namespace                  Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-k9zsg      10m (0%)      0 (0%)      0 (0%)           0 (0%)         6m41s
+  kube-system                kube-proxy-gmmpf    100m (5%)     0 (0%)      0 (0%)           0 (0%)         6m41s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests   Limits
+  --------                    --------   ------
+  cpu                         110m (5%)  0 (0%)
+  memory                      0 (0%)     0 (0%)
+  ephemeral-storage           0 (0%)     0 (0%)
+  attachable-volumes-aws-ebs  0          0
+Events:
+  Type    Reason    Age    From                                        Message
+  ----    ------    ----   ----                                        -------
+  Normal  Starting  6m33s  kube-proxy, ip-192-168-41-165.ec2.internal  Starting kube-proxy.
+
+
+Name:               ip-192-168-70-158.ec2.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-011e0fa93c1785c31
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.medium
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-east-1
+                    failure-domain.beta.kubernetes.io/zone=us-east-1c
+                    kubernetes.io/hostname=ip-192-168-70-158.ec2.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 01 Aug 2019 06:27:28 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Thu, 01 Aug 2019 06:33:59 +0000   Thu, 01 Aug 2019 06:27:28 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Thu, 01 Aug 2019 06:33:59 +0000   Thu, 01 Aug 2019 06:27:28 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Thu, 01 Aug 2019 06:33:59 +0000   Thu, 01 Aug 2019 06:27:28 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Thu, 01 Aug 2019 06:33:59 +0000   Thu, 01 Aug 2019 06:27:48 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.70.158
+  ExternalIP:   3.86.149.2
+  InternalDNS:  ip-192-168-70-158.ec2.internal
+  ExternalDNS:  ec2-3-86-149-2.compute-1.amazonaws.com
+  Hostname:     ip-192-168-70-158.ec2.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3978296Ki
+ pods:                        17
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3875896Ki
+ pods:                        17
+System Info:
+ Machine ID:                 ec25fa621906cedd82403a2acba3c52c
+ System UUID:                EC25FA62-1906-CEDD-8240-3A2ACBA3C52C
+ Boot ID:                    d138ed4f-1f84-448f-b318-8b977faf4580
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-east-1c/i-011e0fa93c1785c31
+Non-terminated Pods:         (2 in total)
+  Namespace                  Name                CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-zmjfn      10m (0%)      0 (0%)      0 (0%)           0 (0%)         6m39s
+  kube-system                kube-proxy-gzg2g    100m (5%)     0 (0%)      0 (0%)           0 (0%)         6m39s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests   Limits
+  --------                    --------   ------
+  cpu                         110m (5%)  0 (0%)
+  memory                      0 (0%)     0 (0%)
+  ephemeral-storage           0 (0%)     0 (0%)
+  attachable-volumes-aws-ebs  0          0
+Events:
+  Type    Reason    Age    From                                        Message
+  ----    ------    ----   ----                                        -------
+  Normal  Starting  6m35s  kube-proxy, ip-192-168-70-158.ec2.internal  Starting kube-proxy.
+
+
+Name:               ip-192-168-81-6.ec2.internal
+Roles:              <none>
+Labels:             alpha.eksctl.io/cluster-name=prod
+                    alpha.eksctl.io/instance-id=i-076bfc511377302f6
+                    alpha.eksctl.io/nodegroup-name=standard-workers
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=t3.medium
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=us-east-1
+                    failure-domain.beta.kubernetes.io/zone=us-east-1c
+                    kubernetes.io/hostname=ip-192-168-81-6.ec2.internal
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 01 Aug 2019 06:27:26 +0000
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:26 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:26 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:26 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Thu, 01 Aug 2019 06:34:06 +0000   Thu, 01 Aug 2019 06:27:36 +0000   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:   192.168.81.6
+  ExternalIP:   3.95.159.247
+  InternalDNS:  ip-192-168-81-6.ec2.internal
+  ExternalDNS:  ec2-3-95-159-247.compute-1.amazonaws.com
+  Hostname:     ip-192-168-81-6.ec2.internal
+Capacity:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           20959212Ki
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3978296Ki
+ pods:                        17
+Allocatable:
+ attachable-volumes-aws-ebs:  25
+ cpu:                         2
+ ephemeral-storage:           19316009748
+ hugepages-1Gi:               0
+ hugepages-2Mi:               0
+ memory:                      3875896Ki
+ pods:                        17
+System Info:
+ Machine ID:                 ec2631f1f89cb3240ccb41e0ef8daaa9
+ System UUID:                EC2631F1-F89C-B324-0CCB-41E0EF8DAAA9
+ Boot ID:                    93a6e608-6466-471a-8a60-4c57b666a009
+ Kernel Version:             4.14.128-112.105.amzn2.x86_64
+ OS Image:                   Amazon Linux 2
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://18.6.1
+ Kubelet Version:            v1.13.7-eks-c57ff8
+ Kube-Proxy Version:         v1.13.7-eks-c57ff8
+ProviderID:                  aws:///us-east-1c/i-076bfc511377302f6
+Non-terminated Pods:         (4 in total)
+  Namespace                  Name                        CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                  ----                        ------------  ----------  ---------------  -------------  ---
+  kube-system                aws-node-2g5l4              10m (0%)      0 (0%)      0 (0%)           0 (0%)         6m41s
+  kube-system                coredns-67cdb69b9b-2p84c    100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     11m
+  kube-system                coredns-67cdb69b9b-5hbkw    100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     11m
+  kube-system                kube-proxy-znsh7            100m (5%)     0 (0%)      0 (0%)           0 (0%)         6m41s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource                    Requests    Limits
+  --------                    --------    ------
+  cpu                         310m (15%)  0 (0%)
+  memory                      140Mi (3%)  340Mi (8%)
+  ephemeral-storage           0 (0%)      0 (0%)
+  attachable-volumes-aws-ebs  0           0
+Events:
+  Type    Reason    Age    From                                      Message
+  ----    ------    ----   ----                                      -------
+  Normal  Starting  6m33s  kube-proxy, ip-192-168-81-6.ec2.internal  Starting kube-proxy.
+AP-ROLE-NAME6:~/environment $ kubectl  get namespaces                                                                                                                                               
+NAME          STATUS   AGE
+default       Active   14m
+kube-public   Active   14m
+kube-system   Active   14m
+AP-ROLE-NAME6:~/environment $ 
+
+---------------------------------------
+
+------------------------------start in seperate terminal and leave the terminal open helem terminal -------------
+
+AP-ROLE-NAME6:~/environment $ export TILLER_NAMESPACE = tiller
+bash: export: `=': not a valid identifier
+AP-ROLE-NAME6:~/environment $ export TILLER_NAMESPACE=tiller
+AP-ROLE-NAME6:~/environment $ tiller -listen=localhost:44134 -storage=secret -logtostderr
+[main] 2019/08/01 07:32:43 Starting Tiller v2.14.3 (tls=false)
+[main] 2019/08/01 07:32:43 GRPC listening on localhost:44134
+[main] 2019/08/01 07:32:43 Probes listening on :44135
+[main] 2019/08/01 07:32:43 Storage driver is Secret
+[main] 2019/08/01 07:32:43 Max history per release is 0
+
+-------------------------------------------
+
+Route 53 to map DNS name to loadbalacer ip (ExternalIP)
+http://kubernetes.student6.courseandlabs.com/          =  aef4e613eb43911e981d702396c3f85a-1349115593.us-east-1.elb.amazonaws.com
+
+AP-ROLE-NAME6:~/environment $ kubectl get services
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+testfrontend   LoadBalancer   10.100.186.47   aef4e613eb43911e981d702396c3f85a-1349115593.us-east-1.elb.amazonaws.com   80:30033/TCP   21s
+AP-ROLE-NAME6:~/environment $ 
+
+----------------------------------day 4 service name becomming dns name for cliusterip
+
+
+
+AP-ROLE-NAME6:~/environment $ kubectl get service
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+kubernetes     ClusterIP      10.100.0.1      <none>                                                                    443/TCP        89m
+testfrontend   LoadBalancer   10.100.62.251   a1d8ead02b42811e981d702396c3f85a-1486257405.us-east-1.elb.amazonaws.com   80:32585/TCP   65m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   0%/50%    2         10        2          66m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   82%/50%   2         10        2          66m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   82%/50%   2         10        2          66m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   82%/50%   2         10        4          67m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   82%/50%   2         10        4          67m
+AP-ROLE-NAME6:~/environment $ kubectl get service
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+kubernetes     ClusterIP      10.100.0.1      <none>                                                                    443/TCP        92m
+testfrontend   LoadBalancer   10.100.62.251   a1d8ead02b42811e981d702396c3f85a-1486257405.us-east-1.elb.amazonaws.com   80:32585/TCP   67m
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+apache-deployment-954897f69-bqnpb   1/1     Running   0          68m
+apache-deployment-954897f69-j8cl6   1/1     Running   0          82s
+apache-deployment-954897f69-jcftb   1/1     Running   0          68m
+apache-deployment-954897f69-r4q7m   1/1     Running   0          82s
+load-generator-557649ddcd-xj55v     1/1     Running   0          5m3s
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+apache-deployment-954897f69-bqnpb   1/1     Running   0          68m
+apache-deployment-954897f69-j8cl6   1/1     Running   0          109s
+apache-deployment-954897f69-jcftb   1/1     Running   0          68m
+apache-deployment-954897f69-r4q7m   1/1     Running   0          109s
+load-generator-557649ddcd-xj55v     1/1     Running   0          5m30s
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+apache-deployment-954897f69-bqnpb   1/1     Running   0          68m
+apache-deployment-954897f69-j8cl6   1/1     Running   0          114s
+apache-deployment-954897f69-jcftb   1/1     Running   0          68m
+apache-deployment-954897f69-r4q7m   1/1     Running   0          114s
+load-generator-557649ddcd-xj55v     1/1     Running   0          5m35s
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+apache-deployment-954897f69-bqnpb   1/1     Running   0          70m
+apache-deployment-954897f69-j8cl6   1/1     Running   0          3m27s
+apache-deployment-954897f69-jcftb   1/1     Running   0          70m
+apache-deployment-954897f69-r4q7m   1/1     Running   0          3m27s
+load-generator-557649ddcd-xj55v     1/1     Running   0          7m8s
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+apache-deployment-954897f69-bqnpb   1/1     Running   0          111m
+apache-deployment-954897f69-jcftb   1/1     Running   0          111m
+load-generator-557649ddcd-xj55v     1/1     Running   1          47m
+AP-ROLE-NAME6:~/environment $ kubectl get deployment apache-deployment
+NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+apache-deployment   2/2     2            2           112m
+AP-ROLE-NAME6:~/environment $ kubectl describe deployment apache-deployment
+Name:                   apache-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 01 Aug 2019 06:46:39 +0000
+Labels:                 app=apache
+Annotations:            deployment.kubernetes.io/revision: 1
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {"apiVersion":"apps/v1beta1","kind":"Deployment","metadata":{"annotations":{},"name":"apache-deployment","namespace":"default"},"spec":{"r...
+Selector:               app=apache
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=apache
+  Containers:
+   apache:
+    Image:      gcr.io/google_containers/hpa-example
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     1
+      memory:  500Mi
+    Requests:
+      cpu:        500m
+      memory:     200Mi
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   apache-deployment-954897f69 (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  45m   deployment-controller  Scaled up replica set apache-deployment-954897f69 to 4
+  Normal  ScalingReplicaSet  36m   deployment-controller  Scaled down replica set apache-deployment-954897f69 to 2
+AP-ROLE-NAME6:~/environment $ kubectl get service
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+kubernetes     ClusterIP      10.100.0.1      <none>                                                                    443/TCP        137m
+testfrontend   LoadBalancer   10.100.62.251   a1d8ead02b42811e981d702396c3f85a-1486257405.us-east-1.elb.amazonaws.com   80:32585/TCP   113m
+AP-ROLE-NAME6:~/environment $ kubectl describe service testfrontend
+Name:                     testfrontend
+Namespace:                default
+Labels:                   <none>
+Annotations:              kubectl.kubernetes.io/last-applied-configuration:
+                            {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"testfrontend","namespace":"default"},"spec":{"ports":[{"port":80,...
+Selector:                 app=apache
+Type:                     LoadBalancer
+IP:                       10.100.62.251
+LoadBalancer Ingress:     a1d8ead02b42811e981d702396c3f85a-1486257405.us-east-1.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  32585/TCP
+Endpoints:                192.168.43.167:80,192.168.84.190:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   41%/50%   2         10        4          118m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   41%/50%   2         10        4          118m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   41%/50%   2         10        4          118m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   41%/50%   2         10        4          118m
+AP-ROLE-NAME6:~/environment $ kubectl get hpa
+NAME                    REFERENCE                      TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+apache-deployment-hpa   Deployment/apache-deployment   41%/50%   2         10        4          118m
+AP-ROLE-NAME6:~/environment $ kubectl get service
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+kubernetes     ClusterIP      10.100.0.1      <none>                                                                    443/TCP        142m
+testfrontend   LoadBalancer   10.100.62.251   a1d8ead02b42811e981d702396c3f85a-1486257405.us-east-1.elb.amazonaws.com   80:32585/TCP   118m
+AP-ROLE-NAME6:~/environment $ kubectl describe service testfrontend
+Name:                     testfrontend
+Namespace:                default
+Labels:                   <none>
+Annotations:              kubectl.kubernetes.io/last-applied-configuration:
+                            {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"testfrontend","namespace":"default"},"spec":{"ports":[{"port":80,...
+Selector:                 app=apache
+Type:                     LoadBalancer
+IP:                       10.100.62.251
+LoadBalancer Ingress:     a1d8ead02b42811e981d702396c3f85a-1486257405.us-east-1.elb.amazonaws.com
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  32585/TCP
+Endpoints:                192.168.31.56:80,192.168.43.167:80,192.168.80.210:80 + 1 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+AP-ROLE-NAME6:~/environment $ kubectl delete all --all
+pod "apache-deployment-954897f69-8kz25" deleted
+pod "apache-deployment-954897f69-bqnpb" deleted
+pod "apache-deployment-954897f69-jcftb" deleted
+pod "apache-deployment-954897f69-nxbcd" deleted
+pod "load-generator-557649ddcd-xj55v" deleted
+service "kubernetes" deleted
+service "testfrontend" deleted
+deployment.apps "apache-deployment" deleted
+deployment.apps "load-generator" deleted
+horizontalpodautoscaler.autoscaling "apache-deployment-hpa" deleted
+AP-ROLE-NAME6:~/environment $ kubectl create namespace test
+namespace/test created
+AP-ROLE-NAME6:~/environment $ kubectl config set-context $(kubectl config current-context) --namespace=test
+Context "i-027d3866e61eb09c2@prod.us-east-1.eksctl.io" modified.
+AP-ROLE-NAME6:~/environment $  kubectl apply -f testapp/deploy.yml
+deployment.apps/apache-deployment created
+horizontalpodautoscaler.autoscaling/apache-deployment-hpa created
+service/testfrontend created
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+apache-deployment-b8bf884b-cwgh9   1/1     Running   0          14s
+apache-deployment-b8bf884b-nscs7   1/1     Running   0          14s
+AP-ROLE-NAME6:~/environment $ kubectl get services
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+testfrontend   LoadBalancer   10.100.186.47   aef4e613eb43911e981d702396c3f85a-1349115593.us-east-1.elb.amazonaws.com   80:30033/TCP   21s
+AP-ROLE-NAME6:~/environment $ docker build -t knowdocker/myfrontend:2.0 testapp/frontend/                                                                                                           
+Sending build context to Docker daemon  4.608kB
+Step 1/8 : FROM centos:7
+ ---> 9f38484d220f
+Step 2/8 : MAINTAINER mailtoraja.s@gmail.com
+ ---> Using cache
+ ---> d292260c4781
+Step 3/8 : RUN yum -y update
+ ---> Using cache
+ ---> 03a3373e80e5
+Step 4/8 : RUN yum -y install httpd
+ ---> Using cache
+ ---> 70d186a8e365
+Step 5/8 : ADD code /var/www/html
+ ---> adadae800952
+Step 6/8 : ENV BACKENDLB=test
+ ---> Running in 380cd0ebecb2
+Removing intermediate container 380cd0ebecb2
+ ---> a75df7d8727e
+Step 7/8 : EXPOSE 80
+ ---> Running in 41f34e6f2374
+Removing intermediate container 41f34e6f2374
+ ---> 651a96a751e5
+Step 8/8 : CMD ["apachectl", "-D", "FOREGROUND"]
+ ---> Running in fd4ad59389b9
+Removing intermediate container fd4ad59389b9
+ ---> 8f748c5383af
+Successfully built 8f748c5383af
+Successfully tagged knowdocker/myfrontend:2.0
+AP-ROLE-NAME6:~/environment $ docker push knowdocker/myfrontend:2.0
+The push refers to repository [docker.io/knowdocker/myfrontend]
+18b91912a03d: Pushed 
+ee62cf1974f3: Layer already exists 
+7f0d23ed00e1: Layer already exists 
+d69483a6face: Layer already exists 
+2.0: digest: sha256:f6b64ecb2bf6cec6f9e459a777d9e348e04ce1ff0d6f943f93d90fe53921c991 size: 1160
+AP-ROLE-NAME6:~/environment $ kubectl apply -f testapp/deploy.yml
+deployment.apps/apache-deployment configured
+horizontalpodautoscaler.autoscaling/apache-deployment-hpa unchanged
+service/testfrontend unchanged
+AP-ROLE-NAME6:~/environment $ kubectl apply -f testapp/deploy.yml
+deployment.apps/apache-deployment configured
+horizontalpodautoscaler.autoscaling/apache-deployment-hpa unchanged
+service/testfrontend unchanged
+AP-ROLE-NAME6:~/environment $ docker build -t knowdocker/myfrontend:3.0 testapp/frontend/                                                                                                           
+Sending build context to Docker daemon  4.608kB
+Step 1/8 : FROM centos:7
+ ---> 9f38484d220f
+Step 2/8 : MAINTAINER mailtoraja.s@gmail.com
+ ---> Using cache
+ ---> d292260c4781
+Step 3/8 : RUN yum -y update
+ ---> Using cache
+ ---> 03a3373e80e5
+Step 4/8 : RUN yum -y install httpd
+ ---> Using cache
+ ---> 70d186a8e365
+Step 5/8 : ADD code /var/www/html
+ ---> fa9962903c04
+Step 6/8 : ENV BACKENDLB=test
+ ---> Running in 0f62e58e065d
+Removing intermediate container 0f62e58e065d
+ ---> 6f2196249ecb
+Step 7/8 : EXPOSE 80
+ ---> Running in d47309b6d505
+Removing intermediate container d47309b6d505
+ ---> 26473c01c2e2
+Step 8/8 : CMD ["apachectl", "-D", "FOREGROUND"]
+ ---> Running in b68172756bf3
+Removing intermediate container b68172756bf3
+ ---> e88d74d3c796
+Successfully built e88d74d3c796
+Successfully tagged knowdocker/myfrontend:3.0
+AP-ROLE-NAME6:~/environment $ docker push knowdocker/myfrontend:3.0
+The push refers to repository [docker.io/knowdocker/myfrontend]
+f45934bf68b1: Pushed 
+ee62cf1974f3: Layer already exists 
+7f0d23ed00e1: Layer already exists 
+d69483a6face: Layer already exists 
+3.0: digest: sha256:d93bfe71c9c1d2286c5fc736b8c22e6b11c6a1e83b1e189a8eadacdb7ac718fb size: 1160
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/nginx-deployment --revision=2
+Error from server (NotFound): deployments.apps "nginx-deployment" not found
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
+deployment.apps/apache-deployment with revision #2
+Pod Template:
+  Labels:       app=apache
+        pod-template-hash=7947758579
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:2.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:      1
+      memory:   500Mi
+    Requests:
+      cpu:      500m
+      memory:   200Mi
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=1
+deployment.apps/apache-deployment with revision #1
+Pod Template:
+  Labels:       app=apache
+        pod-template-hash=b8bf884b
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:1.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:      1
+      memory:   500Mi
+    Requests:
+      cpu:      500m
+      memory:   200Mi
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+
+AP-ROLE-NAME6:~/environment $ kubectl rollout undo deployment.v1beta1.apps/apache-deployment
+deployment.apps/apache-deployment rolled back
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
+error: unable to find the specified revision
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=3
+deployment.apps/apache-deployment with revision #3
+Pod Template:
+  Labels:       app=apache
+        pod-template-hash=58f6685544
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:3.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:      1
+      memory:   500Mi
+    Requests:
+      cpu:      500m
+      memory:   200Mi
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
+error: unable to find the specified revision
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=1
+deployment.apps/apache-deployment with revision #1
+Pod Template:
+  Labels:       app=apache
+        pod-template-hash=b8bf884b
+  Containers:
+   apache:
+    Image:      knowdocker/myfrontend:1.0
+    Port:       80/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:      1
+      memory:   500Mi
+    Requests:
+      cpu:      500m
+      memory:   200Mi
+    Environment:        <none>
+    Mounts:     <none>
+  Volumes:      <none>
+
+AP-ROLE-NAME6:~/environment $ kubectl rollout undo deployment.v1beta1.apps/apache-deployment --to-revision=1
+deployment.apps/apache-deployment rolled back
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment
+deployment.apps/apache-deployment 
+REVISION  CHANGE-CAUSE
+3         <none>
+4         <none>
+5         <none>
+
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/nginx-deployment
+Error from server (NotFound): deployments.apps "nginx-deployment" not found
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment deployments "apache-deployment"
+error: there is no need to specify a resource type as a separate argument when passing arguments in resource/name form (e.g. 'kubectl get resource/<resource_name>' instead of 'kubectl get resource resource/<resource_name>'
+AP-ROLE-NAME6:~/environment $ kubectl rollout history deployment.v1beta1.apps/apache-deployment
+deployment.apps/apache-deployment 
+REVISION  CHANGE-CAUSE
+3         <none>
+4         <none>
+5         <none>
+
+AP-ROLE-NAME6:~/environment $ kubectl delete all --all
+pod "apache-deployment-b8bf884b-6rww6" deleted
+pod "apache-deployment-b8bf884b-cbt5n" deleted
+service "testfrontend" deleted
+deployment.apps "apache-deployment" deleted
+horizontalpodautoscaler.autoscaling "apache-deployment-hpa" deleted
+AP-ROLE-NAME6:~/environment $ kubectl apply -f testapp/two-tier/deploy.yml
+deployment.apps/hello created
+service/hello created
+deployment.apps/frontend created
+service/frontend created
+AP-ROLE-NAME6:~/environment $ kubectl service hello
+Error: unknown command "service" for "kubectl"
+Run 'kubectl --help' for usage.
+unknown command "service" for "kubectl"
+AP-ROLE-NAME6:~/environment $ kubectl deployment hello
+Error: unknown command "deployment" for "kubectl"
+Run 'kubectl --help' for usage.
+unknown command "deployment" for "kubectl"
+AP-ROLE-NAME6:~/environment $ kubectl get service
+NAME       TYPE           CLUSTER-IP      EXTERNAL-IP                                                               PORT(S)        AGE
+frontend   LoadBalancer   10.100.23.189   af0e0a800b44211e981d702396c3f85a-1092025227.us-east-1.elb.amazonaws.com   80:32581/TCP   2m57s
+hello      ClusterIP      10.100.34.142   <none>                                                                    80/TCP         2m57s
+AP-ROLE-NAME6:~/environment $ kubectl create namespace newtest
+namespace/newtest created
+AP-ROLE-NAME6:~/environment $ kubectl apply -f testapp/two-tier/deploy.yml --namespace=newtest
+deployment.apps/hello created
+service/hello created
+deployment.apps/frontend created
+service/frontend created
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME                       READY   STATUS    RESTARTS   AGE
+frontend-c8665bf8b-9bqqp   1/1     Running   0          14m
+frontend-c8665bf8b-gmqwc   1/1     Running   0          14m
+frontend-c8665bf8b-pkpzs   1/1     Running   0          14m
+frontend-c8665bf8b-zdrdr   1/1     Running   0          14m
+hello-7799b4f47-5p4mq      1/1     Running   0          14m
+hello-7799b4f47-hzjqp      1/1     Running   0          14m
+hello-7799b4f47-t57l4      1/1     Running   0          14m
+hello-7799b4f47-zh5dl      1/1     Running   0          14m
+AP-ROLE-NAME6:~/environment $ kubectl get pods --namespace=newtest
+NAME                       READY   STATUS    RESTARTS   AGE
+frontend-c8665bf8b-cptf6   1/1     Running   0          2m32s
+frontend-c8665bf8b-p2vh8   1/1     Running   0          2m31s
+frontend-c8665bf8b-v6kr8   1/1     Running   0          2m31s
+frontend-c8665bf8b-zg9qc   1/1     Running   0          2m31s
+hello-7799b4f47-fwxxr      1/1     Running   0          2m32s
+hello-7799b4f47-qld74      1/1     Running   0          2m32s
+hello-7799b4f47-stfl8      1/1     Running   0          2m32s
+hello-7799b4f47-z8rbd      1/1     Running   0          2m32s
+AP-ROLE-NAME6:~/environment $ kubectl apply -f testapp/two-tier/deploy.yml --namespace=newtestone
+Error from server (NotFound): error when creating "testapp/two-tier/deploy.yml": namespaces "newtestone" not found
+Error from server (NotFound): error when creating "testapp/two-tier/deploy.yml": namespaces "newtestone" not found
+Error from server (NotFound): error when creating "testapp/two-tier/deploy.yml": namespaces "newtestone" not found
+Error from server (NotFound): error when creating "testapp/two-tier/deploy.yml": namespaces "newtestone" not found
+AP-ROLE-NAME6:~/environment $ kubectl exec -it kubectl frontend-c8665bf8b-cptf6
+Error from server (NotFound): pods "kubectl" not found
+AP-ROLE-NAME6:~/environment $ kubectl exec -it frontend-c8665bf8b-cptf6
+error: you must specify at least one command for the container
+AP-ROLE-NAME6:~/environment $ kubectl exec -it frontend-c8665bf8b-cptf6 bin/bash
+Error from server (NotFound): pods "frontend-c8665bf8b-cptf6" not found
+AP-ROLE-NAME6:~/environment $ kubectl exec -it --namespact=newtest  frontend-c8665bf8b-cptf6 bin/bash                                                                                               
+Error: unknown flag: --namespact
+
+
+Examples:
+  # Get output from running 'date' command from pod mypod, using the first container by default
+  kubectl exec mypod date
+  
+  # Get output from running 'date' command in ruby-container from pod mypod
+  kubectl exec mypod -c ruby-container date
+  
+  # Switch to raw terminal mode, sends stdin to 'bash' in ruby-container from pod mypod
+  # and sends stdout/stderr from 'bash' back to the client
+  kubectl exec mypod -c ruby-container -i -t -- bash -il
+  
+  # List contents of /usr from the first container of pod mypod and sort by modification time.
+  # If the command you want to execute in the pod has any flags in common (e.g. -i),
+  # you must use two dashes (--) to separate your command's flags/arguments.
+  # Also note, do not surround your command and its flags/arguments with quotes
+  # unless that is how you would execute it normally (i.e., do ls -t /usr, not "ls -t /usr").
+  kubectl exec mypod -i -t -- ls -t /usr
+  
+  # Get output from running 'date' command from the first pod of the deployment mydeployment, using the first container by default
+  kubectl exec deploy/mydeployment date
+  
+  # Get output from running 'date' command from the first pod of the service myservice, using the first container by default
+  kubectl exec svc/myservice date
+
+Options:
+  -c, --container='': Container name. If omitted, the first container in the pod will be chosen
+      --pod-running-timeout=1m0s: The length of time (like 5s, 2m, or 3h, higher than zero) to wait until at least one pod is running
+  -i, --stdin=false: Pass stdin to the container
+  -t, --tty=false: Stdin is a TTY
+
+Usage:
+  kubectl exec (POD | TYPE/NAME) [-c CONTAINER] [flags] -- COMMAND [args...] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+unknown flag: --namespact
+AP-ROLE-NAME6:~/environment $ kubectl --namespace=newtest exec -it frontend-c8665bf8b-cptf6 /bin/bash
+root@frontend-c8665bf8b-cptf6:/# http://hello
+bash: http://hello: No such file or directory
+root@frontend-c8665bf8b-cptf6:/# curl http://hello                                                                                                                                                  
+bash: curl: command not found
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.test
+bash: curl: command not found
+root@frontend-c8665bf8b-cptf6:/# apt-get update
+Get:1 http://security.debian.org jessie/updates InRelease [44.9 kB]              
+Get:2 http://nginx.org jessie InRelease [2865 B]                                                    
+Ign http://httpredir.debian.org jessie InRelease                                              
+Get:3 http://httpredir.debian.org jessie-updates InRelease [16.3 kB]                          
+Get:4 http://security.debian.org jessie/updates/main amd64 Packages [871 kB]                          
+Ign http://nginx.org jessie InRelease                                                                 
+Get:5 http://httpredir.debian.org jessie Release.gpg [1652 B]                               
+Get:6 http://nginx.org jessie/nginx amd64 Packages [62.1 kB]                                             
+Get:7 http://httpredir.debian.org jessie Release [77.3 kB]                    
+Get:8 http://httpredir.debian.org jessie-updates/main amd64 Packages [20 B]          
+Get:9 http://httpredir.debian.org jessie/main amd64 Packages [9098 kB]     
+Fetched 10.2 MB in 1s (6327 kB/s)  
+Reading package lists... Done
+W: There is no public key available for the following key IDs:
+AA8E81B4331F7F50
+W: GPG error: http://nginx.org jessie InRelease: The following signatures were invalid: KEYEXPIRED 1471427554
+root@frontend-c8665bf8b-cptf6:/# apt-get -y install curl
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  krb5-locales libcurl3 libffi6 libgmp10 libgnutls-deb0-28 libgssapi-krb5-2 libhogweed2 libidn11 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle4 libp11-kit0 librtmp1
+  libsasl2-2 libsasl2-modules libsasl2-modules-db libssh2-1 libtasn1-6
+Suggested packages:
+  gnutls-bin krb5-doc krb5-user libsasl2-modules-otp libsasl2-modules-ldap libsasl2-modules-sql libsasl2-modules-gssapi-mit libsasl2-modules-gssapi-heimdal
+The following NEW packages will be installed:
+  curl krb5-locales libcurl3 libffi6 libgmp10 libgnutls-deb0-28 libgssapi-krb5-2 libhogweed2 libidn11 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle4 libp11-kit0
+  librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db libssh2-1 libtasn1-6
+0 upgraded, 22 newly installed, 0 to remove and 74 not upgraded.
+Need to get 6027 kB of archives.
+After this operation, 11.5 MB of additional disk space will be used.
+Get:1 http://security.debian.org/ jessie/updates/main libgnutls-deb0-28 amd64 3.3.30-0+deb8u1 [749 kB]
+Get:2 http://security.debian.org/ jessie/updates/main libkrb5support0 amd64 1.12.1+dfsg-19+deb8u5 [59.5 kB]
+Get:3 http://security.debian.org/ jessie/updates/main libk5crypto3 amd64 1.12.1+dfsg-19+deb8u5 [115 kB]                          
+Get:4 http://httpredir.debian.org/debian/ jessie/main libgmp10 amd64 2:6.0.0+dfsg-6 [253 kB]                                 
+Get:5 http://httpredir.debian.org/debian/ jessie/main libnettle4 amd64 2.7.1-5+deb8u2 [176 kB]
+Get:6 http://security.debian.org/ jessie/updates/main libkrb5-3 amd64 1.12.1+dfsg-19+deb8u5 [303 kB]
+Get:7 http://httpredir.debian.org/debian/ jessie/main libhogweed2 amd64 2.7.1-5+deb8u2 [125 kB]
+Get:8 http://security.debian.org/ jessie/updates/main libgssapi-krb5-2 amd64 1.12.1+dfsg-19+deb8u5 [152 kB]
+Get:9 http://httpredir.debian.org/debian/ jessie/main libffi6 amd64 3.1-2+deb8u1 [20.2 kB]
+Get:10 http://security.debian.org/ jessie/updates/main libidn11 amd64 1.29-1+deb8u3 [137 kB]
+Get:11 http://security.debian.org/ jessie/updates/main libssh2-1 amd64 1.4.3-4.1+deb8u5 [128 kB]
+Get:12 http://httpredir.debian.org/debian/ jessie/main libp11-kit0 amd64 0.20.7-1 [81.2 kB]
+Get:13 http://security.debian.org/ jessie/updates/main libcurl3 amd64 7.38.0-4+deb8u15 [259 kB]
+Get:14 http://httpredir.debian.org/debian/ jessie/main libtasn1-6 amd64 4.2-3+deb8u3 [49.2 kB]
+Get:15 http://security.debian.org/ jessie/updates/main krb5-locales all 1.12.1+dfsg-19+deb8u5 [2649 kB]
+Get:16 http://httpredir.debian.org/debian/ jessie/main libkeyutils1 amd64 1.5.9-5+b1 [12.0 kB]
+Get:17 http://security.debian.org/ jessie/updates/main curl amd64 7.38.0-4+deb8u15 [204 kB]
+Get:18 http://httpredir.debian.org/debian/ jessie/main libsasl2-modules-db amd64 2.1.26.dfsg1-13+deb8u1 [67.1 kB]
+Get:19 http://httpredir.debian.org/debian/ jessie/main libsasl2-2 amd64 2.1.26.dfsg1-13+deb8u1 [105 kB]
+Get:20 http://httpredir.debian.org/debian/ jessie/main libldap-2.4-2 amd64 2.4.40+dfsg-1+deb8u4 [218 kB]
+Get:21 http://httpredir.debian.org/debian/ jessie/main librtmp1 amd64 2.4+20150115.gita107cef-1+deb8u1 [60.0 kB]
+Get:22 http://httpredir.debian.org/debian/ jessie/main libsasl2-modules amd64 2.1.26.dfsg1-13+deb8u1 [101 kB]
+Fetched 6027 kB in 1s (4901 kB/s)      
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libgmp10:amd64.
+(Reading database ... 9733 files and directories currently installed.)
+Preparing to unpack .../libgmp10_2%3a6.0.0+dfsg-6_amd64.deb ...
+Unpacking libgmp10:amd64 (2:6.0.0+dfsg-6) ...
+Selecting previously unselected package libnettle4:amd64.
+Preparing to unpack .../libnettle4_2.7.1-5+deb8u2_amd64.deb ...
+Unpacking libnettle4:amd64 (2.7.1-5+deb8u2) ...
+Selecting previously unselected package libhogweed2:amd64.
+Preparing to unpack .../libhogweed2_2.7.1-5+deb8u2_amd64.deb ...
+Unpacking libhogweed2:amd64 (2.7.1-5+deb8u2) ...
+Selecting previously unselected package libffi6:amd64.
+Preparing to unpack .../libffi6_3.1-2+deb8u1_amd64.deb ...
+Unpacking libffi6:amd64 (3.1-2+deb8u1) ...
+Selecting previously unselected package libp11-kit0:amd64.
+Preparing to unpack .../libp11-kit0_0.20.7-1_amd64.deb ...
+Unpacking libp11-kit0:amd64 (0.20.7-1) ...
+Selecting previously unselected package libtasn1-6:amd64.
+Preparing to unpack .../libtasn1-6_4.2-3+deb8u3_amd64.deb ...
+Unpacking libtasn1-6:amd64 (4.2-3+deb8u3) ...
+Selecting previously unselected package libgnutls-deb0-28:amd64.
+Preparing to unpack .../libgnutls-deb0-28_3.3.30-0+deb8u1_amd64.deb ...
+Unpacking libgnutls-deb0-28:amd64 (3.3.30-0+deb8u1) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../libkeyutils1_1.5.9-5+b1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.5.9-5+b1) ...
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../libkrb5support0_1.12.1+dfsg-19+deb8u5_amd64.deb ...
+Unpacking libkrb5support0:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../libk5crypto3_1.12.1+dfsg-19+deb8u5_amd64.deb ...
+Unpacking libk5crypto3:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../libkrb5-3_1.12.1+dfsg-19+deb8u5_amd64.deb ...
+Unpacking libkrb5-3:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../libgssapi-krb5-2_1.12.1+dfsg-19+deb8u5_amd64.deb ...
+Unpacking libgssapi-krb5-2:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Selecting previously unselected package libidn11:amd64.
+Preparing to unpack .../libidn11_1.29-1+deb8u3_amd64.deb ...
+Unpacking libidn11:amd64 (1.29-1+deb8u3) ...
+Selecting previously unselected package libsasl2-modules-db:amd64.
+Preparing to unpack .../libsasl2-modules-db_2.1.26.dfsg1-13+deb8u1_amd64.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.26.dfsg1-13+deb8u1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../libsasl2-2_2.1.26.dfsg1-13+deb8u1_amd64.deb ...
+Unpacking libsasl2-2:amd64 (2.1.26.dfsg1-13+deb8u1) ...
+Selecting previously unselected package libldap-2.4-2:amd64.
+Preparing to unpack .../libldap-2.4-2_2.4.40+dfsg-1+deb8u4_amd64.deb ...
+Unpacking libldap-2.4-2:amd64 (2.4.40+dfsg-1+deb8u4) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../librtmp1_2.4+20150115.gita107cef-1+deb8u1_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20150115.gita107cef-1+deb8u1) ...
+Selecting previously unselected package libssh2-1:amd64.
+Preparing to unpack .../libssh2-1_1.4.3-4.1+deb8u5_amd64.deb ...
+Unpacking libssh2-1:amd64 (1.4.3-4.1+deb8u5) ...
+Selecting previously unselected package libcurl3:amd64.
+Preparing to unpack .../libcurl3_7.38.0-4+deb8u15_amd64.deb ...
+Unpacking libcurl3:amd64 (7.38.0-4+deb8u15) ...
+Selecting previously unselected package krb5-locales.
+Preparing to unpack .../krb5-locales_1.12.1+dfsg-19+deb8u5_all.deb ...
+Unpacking krb5-locales (1.12.1+dfsg-19+deb8u5) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.38.0-4+deb8u15_amd64.deb ...
+Unpacking curl (7.38.0-4+deb8u15) ...
+Selecting previously unselected package libsasl2-modules:amd64.
+Preparing to unpack .../libsasl2-modules_2.1.26.dfsg1-13+deb8u1_amd64.deb ...
+Unpacking libsasl2-modules:amd64 (2.1.26.dfsg1-13+deb8u1) ...
+Setting up libgmp10:amd64 (2:6.0.0+dfsg-6) ...
+Setting up libnettle4:amd64 (2.7.1-5+deb8u2) ...
+Setting up libhogweed2:amd64 (2.7.1-5+deb8u2) ...
+Setting up libffi6:amd64 (3.1-2+deb8u1) ...
+Setting up libp11-kit0:amd64 (0.20.7-1) ...
+Setting up libtasn1-6:amd64 (4.2-3+deb8u3) ...
+Setting up libgnutls-deb0-28:amd64 (3.3.30-0+deb8u1) ...
+Setting up libkeyutils1:amd64 (1.5.9-5+b1) ...
+Setting up libkrb5support0:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Setting up libk5crypto3:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Setting up libkrb5-3:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Setting up libgssapi-krb5-2:amd64 (1.12.1+dfsg-19+deb8u5) ...
+Setting up libidn11:amd64 (1.29-1+deb8u3) ...
+Setting up libsasl2-modules-db:amd64 (2.1.26.dfsg1-13+deb8u1) ...
+Setting up libsasl2-2:amd64 (2.1.26.dfsg1-13+deb8u1) ...
+Setting up libldap-2.4-2:amd64 (2.4.40+dfsg-1+deb8u4) ...
+Setting up librtmp1:amd64 (2.4+20150115.gita107cef-1+deb8u1) ...
+Setting up libssh2-1:amd64 (1.4.3-4.1+deb8u5) ...
+Setting up libcurl3:amd64 (7.38.0-4+deb8u15) ...
+Setting up krb5-locales (1.12.1+dfsg-19+deb8u5) ...
+Setting up curl (7.38.0-4+deb8u15) ...
+Setting up libsasl2-modules:amd64 (2.1.26.dfsg1-13+deb8u1) ...
+Processing triggers for libc-bin (2.19-18+deb8u4) ...
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.test
+{"message":"Hello"}
+root@frontend-c8665bf8b-cptf6:/# curl http://hello     
+{"message":"Hello"}
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.test
+{"message":"Hello"}
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.111 
+curl: (6) Could not resolve host: hello.111
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.newtest
+{"message":"Hello"}
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.111
+curl: (6) Could not resolve host: hello.111
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.111
+curl: (6) Could not resolve host: hello.111
+root@frontend-c8665bf8b-cptf6:/# curl http://hello.newtest
+{"message":"Hello"}
+root@frontend-c8665bf8b-cptf6:/# curl http://frontend.newtest                                                                                                                                       
+{"message":"Hello"}
+root@frontend-c8665bf8b-cptf6:/# curl http://frontend.test   
+{"message":"Hello"}
+root@frontend-c8665bf8b-cptf6:/# kubectl apply -f testapp/test-quota.yml
