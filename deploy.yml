@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: apache
-        image: knowdocker/myfrontend:3.0
+        image: knowdocker/myfrontend:2.0
         ports:
         - containerPort: 80
         resources:

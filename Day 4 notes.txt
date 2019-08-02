@@ -367,6 +367,7 @@
   367  git commit -m "day 3 end"
   368  git push
   369   mv ~/.aws ~/.aws_backup1
+  ----------------------------------------------- Day 4 started -----------------------
   370   eksctl version
   371  eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami auto
   372  --region us-east-1a --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 eksctl create cluster --region us-east-1 --name prod --version 1.13 --nodegroup-name standard-workers --node-type t3.small --nodes 3 --nodes-min 3 --nodes-max 3 --node-ami aut
@@ -453,40 +454,56 @@
   453  kubectl delete all --all
   454  kubectl create namespace test
   455  kubectl config set-context $(kubectl config current-context) --namespace=test
+  ---  first deployment -----
   456   kubectl apply -f testapp/deploy.yml
   457  kubectl get pods
   458  kubectl get services
+  -------- building new image version -----------
   459  docker build -t knowdocker/myfrontend:2.0 testapp/frontend/
   460  docker push knowdocker/myfrontend:2.0
+  ----------------update deplo.yml file with new version and do deployemnt ----------
   461  kubectl apply -f testapp/deploy.yml
   462  docker build -t knowdocker/myfrontend:3.0 testapp/frontend/
   463  docker push knowdocker/myfrontend:3.0
+  ---------------Try out history o deployment ------------
   464  kubectl rollout history deployment.v1beta1.apps/nginx-deployment --revision=2
   465  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
   466  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=1
+  --------------rolling back to older verion of deployment using undo command ----------
   467  kubectl rollout undo deployment.v1beta1.apps/apache-deployment
   468  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
   469  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=3
   470  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=2
   471  kubectl rollout history deployment.v1beta1.apps/apache-deployment --revision=1
+  --------------rolling back to older verion of deployment using undo command ----------
   472  kubectl rollout undo deployment.v1beta1.apps/apache-deployment --to-revision=1
   473  kubectl rollout history deployment.v1beta1.apps/apache-deployment
   474  kubectl rollout history deployment.v1beta1.apps/nginx-deployment
   475  kubectl rollout history deployment.v1beta1.apps/apache-deployment deployments "apache-deployment"
   476  kubectl rollout history deployment.v1beta1.apps/apache-deployment
   477  kubectl delete all --all
+  -------------------deployment of two tier model-----------------------
   478  kubectl apply -f testapp/two-tier/deploy.yml
   479  kubectl service hello
   480  kubectl deployment hello
   481  kubectl get service
+  -----------creating new name space newtest  --------
   482  kubectl create namespace newtest
   483  kubectl apply -f testapp/two-tier/deploy.yml --namespace=newtest
   484  kubectl get pods
   485  kubectl get pods --namespace=newtest
+  -----------creating new name space newtest -------
   486  kubectl apply -f testapp/two-tier/deploy.yml --namespace=newtestone
   487  kubectl exec -it kubectl frontend-c8665bf8b-cptf6
   488  kubectl exec -it frontend-c8665bf8b-cptf6
   489  kubectl exec -it frontend-c8665bf8b-cptf6 bin/bash
+  --------------------into bin of newtesone---
+  
+  try to ping service in other name space say test from newtest namespace frontend shell script
+  
+  curl http://hello.test
+  curl http://frontend.test => here test is other namespace and current namespace is newtest
+  
   490  kubectl exec -it --namespact=newtest  frontend-c8665bf8b-cptf6 bin/bash
   491  kubectl --namespace=newtest exec -it frontend-c8665bf8b-cptf6 /bin/bash
   492  kubectl delete all --all --namesace=newtest
@@ -503,9 +520,11 @@
   503  kubectl apply -f testapp/test-quota.yml
   504  kubectl create namespace test
   505  kubectl config set-context $(kubectl config current-context) --namespace=test
+  ------------------ set resource quota test-quota.yml --------------
   506  kubectl apply -f testapp/test-quota.yml
   507  kubectl get service
   508  kubectl describe namespace test
+  ------------------ set limitrange to avoid container creation abuse ------
   509  kubectl apply -f testapp/test-limitrange.yml
   510  kubectl describe namespace test
   511  kubectl delete all --all namespace test

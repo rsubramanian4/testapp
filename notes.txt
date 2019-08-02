@@ -1,3 +1,5 @@
+ -----------commanda -----------
+ mv ~/.aws ~/.aws_backup1
 
 eksctl create cluster \
 --region us-east-1 \
@@ -19,10 +21,22 @@ eksctl create cluster \
  
  kubectl config set-context $(kubectl config current-context) --namespace=test
  
-  kubectl apply -f testapp/deploy.yml
- 
- 
+kubectl apply -f testapp/deploy.yml
 
+kubectl get services
+kubectl get service
+
+kubectl delete all --all
+kubectl delete all --all --namespace=test
+kubectl delete all --all --namespace=newtest
+
+
+kubectl  get namespaces
+
+kubectl apply -f testapp/deploy.yml
+---------------------------------------------------------
+
+ 
 http://labsap.s3-website-us-west-1.amazonaws.com/
 Student5	960252834999
 
