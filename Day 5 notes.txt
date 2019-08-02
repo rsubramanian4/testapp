@@ -1,0 +1,766 @@
+------Day 5
+
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  deploying stack "eksctl-prod-cluster"
+^C
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=prod'
+[✖]  creating CloudFormation stack "eksctl-prod-cluster": AlreadyExistsException: Stack [eksctl-prod-cluster] already exists
+        status code: 400, request id: aa24f47a-b4f0-11e9-aa01-7d729f748561
+[✖]  failed to create cluster "prod"
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod-cluster"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=prod'
+[✖]  creating CloudFormation stack "eksctl-prod-cluster": AlreadyExistsException: Stack [eksctl-prod-cluster] already exists
+        status code: 400, request id: e489882c-b4f0-11e9-9790-f5568e636f32
+[✖]  failed to create cluster "prod"
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name prod_new \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto\
+> --appmesh-access
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[✖]  unable to find image "auto--appmesh-access": InvalidAMIID.Malformed: Invalid id: "auto--appmesh-access" (expecting "ami-...")
+        status code: 400, request id: eee2f967-206f-44e2-909e-8048cd2e6963
+AP-ROLE-NAME6:~/environment $  eksctl create cluster \
+> --region us-east-1 \
+> --name prod_new \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto \
+> --appmesh-access
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prod_new" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prod_new'
+[ℹ]  2 sequential tasks: { create cluster control plane "prod_new", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prod_new-cluster"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=prod_new'
+[✖]  creating CloudFormation stack "eksctl-prod_new-cluster": ValidationError: 1 validation error detected: Value 'eksctl-prod_new-cluster' at 'stackName' failed to satisfy constraint: Member must satisfy regular expression pattern: [a-zA-Z][-a-zA-Z0-9]*
+        status code: 400, request id: 4e336630-b4f1-11e9-b0db-0fad991e3271
+[✖]  failed to create cluster "prod_new"
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name new_prod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto \
+> --appmesh-access
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "new_prod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=new_prod'
+[ℹ]  2 sequential tasks: { create cluster control plane "new_prod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-new_prod-cluster"
+[ℹ]  1 error(s) occurred and cluster hasn't been created properly, you may wish to check CloudFormation console
+[ℹ]  to cleanup resources, run 'eksctl delete cluster --region=us-east-1 --name=new_prod'
+[✖]  creating CloudFormation stack "eksctl-new_prod-cluster": ValidationError: 1 validation error detected: Value 'eksctl-new_prod-cluster' at 'stackName' failed to satisfy constraint: Member must satisfy regular expression pattern: [a-zA-Z][-a-zA-Z0-9]*
+        status code: 400, request id: 5b28341f-b4f1-11e9-aef8-c52ef64212fd
+[✖]  failed to create cluster "new_prod"
+AP-ROLE-NAME6:~/environment $ eksctl create cluster \
+> --region us-east-1 \
+> --name newprod \
+> --version 1.13 \
+> --nodegroup-name standard-workers \
+> --node-type t3.medium \
+> --zones=us-east-1a,us-east-1b,us-east-1c \
+> --nodes 4 \
+> --nodes-min 4 \
+> --nodes-max 4 \
+> --node-ami auto \
+> --appmesh-access
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "newprod" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=newprod'
+[ℹ]  2 sequential tasks: { create cluster control plane "newprod", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-newprod-cluster"
+[ℹ]  deploying stack "eksctl-newprod-cluster"
+eksctl create cluster \
+--region us-east-1 \
+--name newprod \
+--version 1.13 \
+--nodegroup-name standard-workers \
+--node-type t3.medium \
+--zones=us-east-1a,us-east-1b,us-east-1c \
+--nodes 4 \
+--nodes-min 4 \
+--nodes-max 4 \
+--node-ami auto \
+--appmesh-access
+  
+
+
+eksctl create cluster \
+--region us-east-1 \
+--name newprod \
+--version 1.13 \
+--nodegroup-name standard-workers \
+--node-type t3.medium \
+--zones=us-east-1a,us-east-1b,us-east-1c \
+--nodes 4 \
+--nodes-min 4 \
+--nodes-max 4 \
+--node-ami auto \
+--appmesh-access
+^C
+AP-ROLE-NAME6:~/environment $ eksctl create cluster --region us-east-1 --name prodnew --version 1.13 --nodegroup-name standard-workers --node-type t3.medium --zones=us-east-1a,us-east-1b,us-east-1c --nodes 4 --nodes-min 4 --nodes-max 4 --node-ami auto --appmesh-access                                                                                                                            
+[ℹ]  using region us-east-1
+[ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-east-1c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "standard-workers" will use "ami-0f2e8e5663e16b436" [AmazonLinux2/1.13]
+[ℹ]  using Kubernetes version 1.13
+[ℹ]  creating EKS cluster "prodnew" in "us-east-1" region
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --name=prodnew'
+[ℹ]  2 sequential tasks: { create cluster control plane "prodnew", create nodegroup "standard-workers" }
+[ℹ]  building cluster stack "eksctl-prodnew-cluster"
+[ℹ]  deploying stack "eksctl-prodnew-cluster"
+[ℹ]  building nodegroup stack "eksctl-prodnew-nodegroup-standard-workers"
+[ℹ]  deploying stack "eksctl-prodnew-nodegroup-standard-workers"
+[✔]  all EKS cluster resource for "prodnew" had been created
+[✔]  saved kubeconfig as "/home/ec2-user/.kube/config"
+[ℹ]  adding role "arn:aws:iam::960252834999:role/eksctl-prodnew-nodegroup-standard-NodeInstanceRole-1CZQ84212H2YR" to auth ConfigMap
+[ℹ]  nodegroup "standard-workers" has 0 node(s)
+[ℹ]  waiting for at least 4 node(s) to become ready in "standard-workers"
+[ℹ]  nodegroup "standard-workers" has 4 node(s)
+[ℹ]  node "ip-192-168-15-204.ec2.internal" is ready
+[ℹ]  node "ip-192-168-27-227.ec2.internal" is ready
+[ℹ]  node "ip-192-168-46-182.ec2.internal" is ready
+[ℹ]  node "ip-192-168-74-229.ec2.internal" is ready
+[ℹ]  kubectl command should work with "/home/ec2-user/.kube/config", try 'kubectl get nodes'
+[✔]  EKS cluster "prodnew" in "us-east-1" region is ready
+AP-ROLE-NAME6:~/environment $ 
+
+AP-ROLE-NAME6:~/environment $ kubectl get nodes
+NAME                             STATUS   ROLES    AGE   VERSION
+ip-192-168-15-204.ec2.internal   Ready    <none>   92s   v1.13.7-eks-c57ff8
+ip-192-168-27-227.ec2.internal   Ready    <none>   91s   v1.13.7-eks-c57ff8
+ip-192-168-46-182.ec2.internal   Ready    <none>   93s   v1.13.7-eks-c57ff8
+ip-192-168-74-229.ec2.internal   Ready    <none>   92s   v1.13.7-eks-c57ff8
+AP-ROLE-NAME6:~/environment $ 
+
+-------------applicaion running ----
+
+AP-ROLE-NAME6:~/environment $ git clone https://github.com/aws/aws-app-mesh-examples
+Cloning into 'aws-app-mesh-examples'...
+remote: Enumerating objects: 25, done.
+remote: Counting objects: 100% (25/25), done.
+remote: Compressing objects: 100% (23/23), done.
+remote: Total 1575 (delta 2), reused 24 (delta 2), pack-reused 1550
+Receiving objects: 100% (1575/1575), 5.21 MiB | 36.02 MiB/s, done.
+Resolving deltas: 100% (648/648), done.
+AP-ROLE-NAME6:~/environment $ cd aws-app-mesh-examples/examples/apps/djapp/
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ ll
+total 48
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 1_create_the_initial_architecture
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 2_create_injector
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 3_add_crds
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 4_create_initial_mesh_components
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 5_canary
+-rwxrwxr-x 1 ec2-user ec2-user 2181 Aug  2 06:52 amctl.sh
+-rw-rw-r-- 1 ec2-user ec2-user  324 Aug  2 06:52 awscli.yaml
+-rwxrwxr-x 1 ec2-user ec2-user  950 Aug  2 06:52 cleanup.sh
+-rwxrwxr-x 1 ec2-user ec2-user 2253 Aug  2 06:52 create.sh
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 img
+-rwxrwxr-x 1 ec2-user ec2-user  312 Aug  2 06:52 ranCon.sh
+-rw-rw-r-- 1 ec2-user ec2-user 2149 Aug  2 06:52 README.md
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ cd ..
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps (master) $ ll
+total 12
+drwxrwxr-x 7 ec2-user ec2-user 4096 Aug  2 06:52 colorapp
+drwxrwxr-x 8 ec2-user ec2-user 4096 Aug  2 06:52 djapp
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 voteapp
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps (master) $ cd aws-app-mesh-examples/examples/apps/djapp/
+bash: cd: aws-app-mesh-examples/examples/apps/djapp/: No such file or directory
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps (master) $ cd ..
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples (master) $ ll
+total 12
+drwxrwxr-x 5 ec2-user ec2-user 4096 Aug  2 06:52 apps
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 infrastructure
+-rw-rw-r-- 1 ec2-user ec2-user 2197 Aug  2 06:52 README.md
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples (master) $ cd apps
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps (master) $ cd djapp
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ ll
+total 48
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 1_create_the_initial_architecture
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 2_create_injector
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 3_add_crds
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 4_create_initial_mesh_components
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 5_canary
+-rwxrwxr-x 1 ec2-user ec2-user 2181 Aug  2 06:52 amctl.sh
+-rw-rw-r-- 1 ec2-user ec2-user  324 Aug  2 06:52 awscli.yaml
+-rwxrwxr-x 1 ec2-user ec2-user  950 Aug  2 06:52 cleanup.sh
+-rwxrwxr-x 1 ec2-user ec2-user 2253 Aug  2 06:52 create.sh
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 img
+-rwxrwxr-x 1 ec2-user ec2-user  312 Aug  2 06:52 ranCon.sh
+-rw-rw-r-- 1 ec2-user ec2-user 2149 Aug  2 06:52 README.md
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ echo $ROLE_NAME
+
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ echo $AWS_REGION
+
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ echo "export ACCOUNT_ID=${ACCOUNT_ID}" >> ~/.bash_profile
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ echo "export AWS_REGION=${AWS_REGION}" >> ~/.bash_profile
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ aws configure set default.region ${AWS_REGION}
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ aws configure get default.region
+us-east-1
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ aws iam get-role-policy --role-name $ROLE_NAME --policy-name AM-Policy-For-Worker
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+aws: error: argument --role-name: expected one argument
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ ll
+total 48
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 1_create_the_initial_architecture
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 2_create_injector
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 3_add_crds
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 4_create_initial_mesh_components
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 5_canary
+-rwxrwxr-x 1 ec2-user ec2-user 2181 Aug  2 06:52 amctl.sh
+-rw-rw-r-- 1 ec2-user ec2-user  324 Aug  2 06:52 awscli.yaml
+-rwxrwxr-x 1 ec2-user ec2-user  950 Aug  2 06:52 cleanup.sh
+-rwxrwxr-x 1 ec2-user ec2-user 2253 Aug  2 06:52 create.sh
+drwxrwxr-x 2 ec2-user ec2-user 4096 Aug  2 06:52 img
+-rwxrwxr-x 1 ec2-user ec2-user  312 Aug  2 06:52 ranCon.sh
+-rw-rw-r-- 1 ec2-user ec2-user 2149 Aug  2 06:52 README.md
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -f 1_create_the_initial_architecture/1_prod_ns.yaml
+namespace/prod created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -nprod -f 1_create_the_initial_architecture/1_initial_architecture_deployment.yaml
+deployment.apps/dj created
+deployment.apps/metal-v1 created
+deployment.apps/jazz-v1 created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -nprod -f 1_create_the_initial_architecture/1_initial_architecture_services.yaml
+service/dj created
+service/metal-v1 created
+service/jazz-v1 created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get all -nprod
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/dj-7fbb4d499c-gk5dn         1/1     Running   0          45s
+pod/jazz-v1-6d5dd497f-vrhxz     1/1     Running   0          45s
+pod/metal-v1-746d77c67b-55t8j   1/1     Running   0          45s
+
+
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/dj         ClusterIP   10.100.56.206    <none>        9080/TCP   19s
+service/jazz-v1    ClusterIP   10.100.131.109   <none>        9080/TCP   19s
+service/metal-v1   ClusterIP   10.100.145.1     <none>        9080/TCP   19s
+
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dj         1/1     1            1           45s
+deployment.apps/jazz-v1    1/1     1            1           45s
+deployment.apps/metal-v1   1/1     1            1           45s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/dj-7fbb4d499c         1         1         1       45s
+replicaset.apps/jazz-v1-6d5dd497f     1         1         1       45s
+replicaset.apps/metal-v1-746d77c67b   1         1         1       45s
+
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nprod -l app=dj
+NAME                  READY   STATUS    RESTARTS   AGE
+dj-7fbb4d499c-gk5dn   1/1     Running   0          2m24s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl exec -nprod -it dj-7fbb4d499c-gk5dn bash
+root@dj-7fbb4d499c-gk5dn:/usr/src/app# ll
+bash: ll: command not found
+root@dj-7fbb4d499c-gk5dn:/usr/src/app# ls
+Dockerfile  image_push.sh  node_modules  package-lock.json  package.json  server.js
+root@dj-7fbb4d499c-gk5dn:/usr/src/app# curl jazz-v1.prod.svc.cluster.local:9080;echo
+["Astrud Gilberto","Miles Davis"]
+root@dj-7fbb4d499c-gk5dn:/usr/src/app# curl metal-v1.prod.svc.cluster.local:9080;echo
+["Megadeth","Judas Priest"]
+root@dj-7fbb4d499c-gk5dn:/usr/src/app# exit
+exit
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ cd 2_create_injector
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp/2_create_injector (master) $ ll
+total 32
+-rw-rw-r-- 1 ec2-user ec2-user   68 Aug  2 06:52 appmesh-ns.yaml
+-rwxrwxr-x 1 ec2-user ec2-user  592 Aug  2 06:52 ca-bundle.sh
+-rwxrwxr-x 1 ec2-user ec2-user  279 Aug  2 06:52 create.sh
+-rwxrwxr-x 1 ec2-user ec2-user  427 Aug  2 06:52 delete.sh
+-rwxrwxr-x 1 ec2-user ec2-user 2196 Aug  2 06:52 gen-cert.sh
+-rw-rw-r-- 1 ec2-user ec2-user 4365 Aug  2 06:52 inject.yaml
+-rw-rw-r-- 1 ec2-user ec2-user 2964 Aug  2 06:52 inject.yaml.template
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp/2_create_injector (master) $ ./create.sh
+namespace/appmesh-inject created
+creating certs in tmpdir /tmp/tmp.8LgSKNgDN7 
+Generating RSA private key, 2048 bit long modulus
+..........................................................................................................................................................+++
+..........................+++
+e is 65537 (0x10001)
+certificatesigningrequest.certificates.k8s.io/aws-app-mesh-inject.appmesh-inject created
+NAME                                 AGE   REQUESTOR          CONDITION
+aws-app-mesh-inject.appmesh-inject   0s    kubernetes-admin   Pending
+certificatesigningrequest.certificates.k8s.io/aws-app-mesh-inject.appmesh-inject approved
+secret/aws-app-mesh-inject created
+
+processing templates
+Created injector manifest at:/home/ec2-user/environment/aws-app-mesh-examples/examples/apps/djapp/2_create_injector/inject.yaml
+
+serviceaccount/aws-app-mesh-inject-sa created
+clusterrole.rbac.authorization.k8s.io/aws-app-mesh-inject-cr created
+clusterrolebinding.rbac.authorization.k8s.io/aws-app-mesh-inject-binding created
+service/aws-app-mesh-inject created
+deployment.apps/aws-app-mesh-inject created
+mutatingwebhookconfiguration.admissionregistration.k8s.io/aws-app-mesh-inject created
+
+Waiting for pods to come up...
+
+App Inject Pods and Services After Install:
+
+NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+aws-app-mesh-inject   ClusterIP   10.100.250.27   <none>        443/TCP   15s
+NAME                                  READY   STATUS    RESTARTS   AGE
+aws-app-mesh-inject-fcc965769-5z2mh   1/1     Running   0          15s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp/2_create_injector (master) $ 
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp/2_create_injector (master) $ error
+bash: error: command not found
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp/2_create_injector (master) $  cd ..
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl label namespace prod appmesh.k8s.aws/sidecarInjectorWebhook=enabled
+namespace/prod labeled
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nappmesh-inject
+NAME                                  READY   STATUS    RESTARTS   AGE
+aws-app-mesh-inject-fcc965769-5z2mh   1/1     Running   0          3m31s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nprod
+NAME                        READY   STATUS    RESTARTS   AGE
+dj-7fbb4d499c-gk5dn         1/1     Running   0          10m
+jazz-v1-6d5dd497f-vrhxz     1/1     Running   0          10m
+metal-v1-746d77c67b-55t8j   1/1     Running   0          10m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nappmesh-inject
+NAME                                  READY   STATUS    RESTARTS   AGE
+aws-app-mesh-inject-fcc965769-5z2mh   1/1     Running   0          3m50s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -f 3_add_crds/mesh-definition.yaml
+customresourcedefinition.apiextensions.k8s.io/meshes.appmesh.k8s.aws created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -f 3_add_crds/virtual-node-definition.yaml
+customresourcedefinition.apiextensions.k8s.io/virtualnodes.appmesh.k8s.aws created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -f 3_add_crds/virtual-service-definition.yaml
+customresourcedefinition.apiextensions.k8s.io/virtualservices.appmesh.k8s.aws created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -f 3_add_crds/controller-deployment.yaml
+namespace/appmesh-system created
+deployment.apps/app-mesh-controller created
+serviceaccount/app-mesh-sa created
+clusterrole.rbac.authorization.k8s.io/app-mesh-controller created
+clusterrolebinding.rbac.authorization.k8s.io/app-mesh-controller-binding created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nappmesh-system
+NAME                                   READY   STATUS    RESTARTS   AGE
+app-mesh-controller-5bb6cf64cd-sz4c5   1/1     Running   0          16s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ 
+
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl create -f 4_create_initial_mesh_components/mesh.yaml
+mesh.appmesh.k8s.aws/dj-app created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get meshes -nprod
+NAME     AGE
+dj-app   16s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ aws appmesh list-meshes
+{
+    "meshes": [
+        {
+            "meshName": "dj-app", 
+            "arn": "arn:aws:appmesh:us-east-1:960252834999:mesh/dj-app"
+        }
+    ]
+}
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ aws appmesh describe-mesh --mesh-name dj-app
+{
+    "mesh": {
+        "status": {
+            "status": "ACTIVE"
+        }, 
+        "meshName": "dj-app", 
+        "spec": {}, 
+        "metadata": {
+            "version": 1, 
+            "lastUpdatedAt": 1564731092.827, 
+            "createdAt": 1564731092.827, 
+            "arn": "arn:aws:appmesh:us-east-1:960252834999:mesh/dj-app", 
+            "uid": "b832de05-bb2d-4a78-94c7-b7802aad2fb4"
+        }
+    }
+}
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl create -f 4_create_initial_mesh_components/nodes_representing_virtual_services.yaml
+virtualnode.appmesh.k8s.aws/metal created
+virtualnode.appmesh.k8s.aws/jazz created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl create -nprod -f 4_create_initial_mesh_components/nodes_representing_physical_services.yaml
+virtualnode.appmesh.k8s.aws/dj created
+virtualnode.appmesh.k8s.aws/jazz-v1 created
+virtualnode.appmesh.k8s.aws/metal-v1 created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get virtualnodes -nprod
+NAME       AGE
+dj         39s
+jazz       1m
+jazz-v1    39s
+metal      1m
+metal-v1   39s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl apply -nprod -f 4_create_initial_mesh_components/virtual-services.yaml
+virtualservice.appmesh.k8s.aws/jazz.prod.svc.cluster.local created
+virtualservice.appmesh.k8s.aws/metal.prod.svc.cluster.local created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get servcie
+error: the server doesn't have a resource type "servcie"
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get service
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   41m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   42m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get svc -nprod
+NAME       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+dj         ClusterIP   10.100.56.206    <none>        9080/TCP   28m
+jazz-v1    ClusterIP   10.100.131.109   <none>        9080/TCP   28m
+metal-v1   ClusterIP   10.100.145.1     <none>        9080/TCP   28m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl create -nprod -f 4_create_initial_mesh_components/metal_and_jazz_placeholder_services.yaml
+service/jazz created
+service/metal created
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get -nprod virtualservices
+NAME                           AGE
+jazz.prod.svc.cluster.local    4m
+metal.prod.svc.cluster.local   4m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get svc -nprod
+NAME       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+dj         ClusterIP   10.100.56.206    <none>        9080/TCP   29m
+jazz       ClusterIP   10.100.160.245   <none>        9080/TCP   27s
+jazz-v1    ClusterIP   10.100.131.109   <none>        9080/TCP   29m
+metal      ClusterIP   10.100.204.149   <none>        9080/TCP   27s
+metal-v1   ClusterIP   10.100.145.1     <none>        9080/TCP   29m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nprod
+NAME                        READY   STATUS    RESTARTS   AGE
+dj-7fbb4d499c-gk5dn         1/1     Running   0          30m
+jazz-v1-6d5dd497f-vrhxz     1/1     Running   0          30m
+metal-v1-746d77c67b-55t8j   1/1     Running   0          30m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl describe pods/dj-5b445fbdf4-qf8sv -nprod
+Error from server (NotFound): pods "dj-5b445fbdf4-qf8sv" not found
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl describe pods/dj-7fbb4d499c-gk5dn -nprod
+Name:           dj-7fbb4d499c-gk5dn
+Namespace:      prod
+Priority:       0
+Node:           ip-192-168-15-204.ec2.internal/192.168.15.204
+Start Time:     Fri, 02 Aug 2019 07:12:43 +0000
+Labels:         app=dj
+                pod-template-hash=7fbb4d499c
+                version=v1
+Annotations:    kubernetes.io/psp: eks.privileged
+Status:         Running
+IP:             192.168.6.253
+Controlled By:  ReplicaSet/dj-7fbb4d499c
+Containers:
+  dj:
+    Container ID:   docker://81d1f83069161b7694cd3794f775297ebe91194465b4504c9a264fed817e6a4b
+    Image:          672518094988.dkr.ecr.us-west-2.amazonaws.com/hello-world:v1.0
+    Image ID:       docker-pullable://672518094988.dkr.ecr.us-west-2.amazonaws.com/hello-world@sha256:52757babfe481adc8419bcc96b5e7f3da9e586b22006a985d9cc3650916ff31f
+    Port:           9080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 02 Aug 2019 07:13:06 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      HW_RESPONSE:  DJ Reporting for duty!
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-4sh52 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  default-token-4sh52:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-4sh52
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason     Age   From                                     Message
+  ----    ------     ----  ----                                     -------
+  Normal  Scheduled  31m   default-scheduler                        Successfully assigned prod/dj-7fbb4d499c-gk5dn to ip-192-168-15-204.ec2.internal
+  Normal  Pulling    31m   kubelet, ip-192-168-15-204.ec2.internal  pulling image "672518094988.dkr.ecr.us-west-2.amazonaws.com/hello-world:v1.0"
+  Normal  Pulled     31m   kubelet, ip-192-168-15-204.ec2.internal  Successfully pulled image "672518094988.dkr.ecr.us-west-2.amazonaws.com/hello-world:v1.0"
+  Normal  Created    31m   kubelet, ip-192-168-15-204.ec2.internal  Created container
+  Normal  Started    31m   kubelet, ip-192-168-15-204.ec2.internal  Started container
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nprod
+NAME                        READY   STATUS    RESTARTS   AGE
+dj-7fbb4d499c-gk5dn         1/1     Running   0          32m
+jazz-v1-6d5dd497f-vrhxz     1/1     Running   0          32m
+metal-v1-746d77c67b-55t8j   1/1     Running   0          32m
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl patch deployment dj -nprod -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+deployment.extensions/dj patched
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl patch deployment metal-v1 -nprod -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+deployment.extensions/metal-v1 patched
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl patch deployment jazz-v1 -nprod -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+deployment.extensions/jazz-v1 patched
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ 
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ kubectl get pods -nprod
+NAME                        READY   STATUS            RESTARTS   AGE
+dj-7fbb4d499c-gk5dn         1/1     Running           0          32m
+dj-b59c96cc5-zqwgc          0/2     PodInitializing   0          16s
+jazz-v1-5846476449-zng4v    0/2     PodInitializing   0          15s
+jazz-v1-6d5dd497f-vrhxz     1/1     Running           0          32m
+metal-v1-746d77c67b-55t8j   1/1     Running           0          32m
+metal-v1-97ccc8cd-svf6t     0/2     PodInitializing   0          16s
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ 
+AP-ROLE-NAME6:~/environment/aws-app-mesh-examples/examples/apps/djapp (master) $ 
+
+----------------------till lunch -----------
+
+sql part
+
+
+AP-ROLE-NAME6:~/environment $ kubectl apply -f https://k8s.io/examples/application/mysql/mysql-configmap.yaml
+configmap/mysql created
+AP-ROLE-NAME6:~/environment $ kubectl apply -f https://k8s.io/examples/application/mysql/mysql-services.yaml
+service/mysql created
+service/mysql-read created
+AP-ROLE-NAME6:~/environment $ kubectl apply -f testapp/sql/mysql-statefulset.yaml
+statefulset.apps/mysql created
+AP-ROLE-NAME6:~/environment $ kubectl getpods
+Error: unknown command "getpods" for "kubectl"
+Run 'kubectl --help' for usage.
+unknown command "getpods" for "kubectl"
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME      READY   STATUS     RESTARTS   AGE
+mysql-0   0/2     Init:0/2   0          18s
+AP-ROLE-NAME6:~/environment $ kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+mysql-0   1/2     Running   0          41s
+AP-ROLE-NAME6:~/environment $ kubectl get pods -l app=mysql --watch
+NAME      READY   STATUS    RESTARTS   AGE
+mysql-0   2/2     Running   0          56s
+mysql-1   0/2     Pending   0          8s
+^[[A^[[ANAME      READY   STATUS    RESTARTS   AGE
+mysql-1   0/2     Pending   0          14s
+mysql-1   0/2     Pending   0          15s
+mysql-1   0/2     Pending   0          15s
+mysql-1   0/2     Init:0/2   0          15s
+mysql-1   0/2     Init:1/2   0          43s
+mysql-1   0/2     Init:1/2   0          49s
+mysql-1   0/2     PodInitializing   0          55s
+mysql-1   1/2     Running           0          56s
+mysql-1   2/2     Running           0          61s
+mysql-2   0/2     Pending           0          0s
+mysql-2   0/2     Pending           0          0s
+mysql-2   0/2     Pending           0          0s
+mysql-2   0/2     Init:0/2          0          0s
+mysql-2   0/2     Init:1/2          0          27s
+mysql-2   0/2     Init:1/2          0          34s
+mysql-2   0/2     PodInitializing   0          40s
+mysql-2   1/2     Running           0          41s
+mysql-2   2/2     Running           0          46s
+
+
+
+AP-ROLE-NAME6:~/environment/testapp (master) $ kubectl get pvc
+NAME           STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+data-mysql-0   Bound    pvc-2e1e8523-b508-11e9-a0cb-125b23201c78   10Gi       RWO            gp2            4m1s
+data-mysql-1   Bound    pvc-4a754006-b508-11e9-a0cb-125b23201c78   10Gi       RWO            gp2            3m13s
+data-mysql-2   Bound    pvc-6e96adbb-b508-11e9-a0cb-125b23201c78   10Gi       RWO            gp2            2m12s
+AP-ROLE-NAME6:~/environment/testapp (master) $ 
+
+CAP-ROLE-NAME6:~/environment $ kubectl run mysql-client --image=mysql:5.7 -i --rm --restart=Never --\
+>   mysql -h mysql-0.mysql <<EOF
+> CREATE DATABASE test;
+> CREATE TABLE test.messages (message VARCHAR(250));
+> INSERT INTO test.messages VALUES ('hello');
+> EOF
+
+If you don't see a command prompt, try pressing enter.
+pod "mysql-client" deleted
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ kubectl run mysql-client --image=mysql:5.7 -i -t --rm --restart=Never --\
+>   mysql -h mysql-read -e "SELECT * FROM test.messages"
++---------+
+| message |
++---------+
+| hello   |
++---------+
+
+pod "mysql-client" deleted
+AP-ROLE-NAME6:~/environment $ 
+AP-ROLE-NAME6:~/environment $ kubectl run mysql-client-loop --image=mysql:5.7 -i -t --rm --restart=Never --\
+>   bash -ic "while sleep 1; do mysql -h mysql-read -e 'SELECT @@server_id,NOW()'; done"
+
+If you don't see a command prompt, try pressing enter.
+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         100 | 2019-08-02 09:39:30 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         102 | 2019-08-02 09:39:31 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         101 | 2019-08-02 09:39:32 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         100 | 2019-08-02 09:39:33 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         101 | 2019-08-02 09:39:34 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         100 | 2019-08-02 09:39:35 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         100 | 2019-08-02 09:39:36 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         101 | 2019-08-02 09:39:37 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         102 | 2019-08-02 09:39:38 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         102 | 2019-08-02 09:39:39 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         100 | 2019-08-02 09:39:40 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         102 | 2019-08-02 09:39:41 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         100 | 2019-08-02 09:39:42 |
++-------------+---------------------+
++-------------+---------------------+
+| @@server_id | NOW()               |
++-------------+---------------------+
+|         101 | 2019-08-02 09:39:43 |
++-------------+---------------------+
+^C
+pod "mysql-client-loop" deleted
+pod default/mysql-client-loop terminated (Error)
+AP-ROLE-NAME6:~/environment $ 
+
+
+

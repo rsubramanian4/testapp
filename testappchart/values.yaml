@@ -1,0 +1,5 @@
+deployment:
+  name: apache-deployment
+  label: apache
+  imagename: knowdocker/myfrontend
+  imagetag: 2.0

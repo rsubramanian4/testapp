@@ -14,12 +14,15 @@ eksctl create cluster \
 --node-ami auto
 
  eksctl delete cluster --region us-east-1 --name prod 
+ eksctl delete cluster --region us-east-1 --name newprod 
  
  kubectl delete namespace test
  
  kubectl create namespace test
  
  kubectl config set-context $(kubectl config current-context) --namespace=test
+ kubectl config set-context $(kubectl config current-context) --namespace=tiller
+ 
  
 kubectl apply -f testapp/deploy.yml
 
@@ -34,7 +37,47 @@ kubectl delete all --all --namespace=newtest
 kubectl  get namespaces
 
 kubectl apply -f testapp/deploy.yml
----------------------------------------------------------
+------------------------------------------------------------------
+
+
+
+eksctl create cluster \
+--region us-east-1 \
+--name prodnew \
+--version 1.13 \
+--nodegroup-name standard-workers \
+--node-type t3.medium \
+--zones=us-east-1a,us-east-1b,us-east-1c \
+--nodes 4 \
+--nodes-min 4 \
+--nodes-max 4 \
+--node-ami auto \
+--appmesh-access
+
+https://eksworkshop.com/servicemesh_with_appmesh/
+
+https://eksworkshop.com/servicemesh_with_appmesh/create_the_k8s_app/clone_repo/
+https://eksworkshop.com/servicemesh_with_appmesh/create_app_mesh_components/create_injector_controller/
+https://eksworkshop.com/servicemesh_with_appmesh/port_to_app_mesh/create_the_mesh/
+https://eksworkshop.com/servicemesh_with_appmesh/port_to_app_mesh/create_the_virtual_nodes/
+
+
+https://docs.google.com/document/d/1mUQCSdgF4-IfKlEknHenTiVMkN-gIYzJdvXiEhlDURo/edit#
+kubectl apply -f https://k8s.io/examples/application/mysql/mysql-configmap.yaml
+kubectl apply -f https://k8s.io/examples/application/mysql/mysql-services.yaml
+kubectl apply -f https://k8s.io/examples/application/mysql/mysql-statefulset.yaml
+kubectl apply -f testapp/sql/mysql-statefulset.yaml
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------
 
  
 http://labsap.s3-website-us-west-1.amazonaws.com/
